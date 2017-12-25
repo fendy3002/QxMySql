@@ -1,6 +1,8 @@
+require("dotenv").config({path: ".env" });
+
 module.exports = {
     app: {
-        port: process.env.PORT || 9199,
+        port: process.env.APP_PORT || 9199,
         env: process.env.NODE_ENV || "development",
         hot: process.env.HOT,
         startHot: process.env.START_HOT,

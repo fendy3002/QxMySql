@@ -4,9 +4,9 @@
 
 import path from 'path';
 import webpack from 'webpack';
+require("dotenv").config({path: ".env" });
+
 import { dependencies as externals } from './app/package.json';
-import dotenv from "dotenv";
-dotenv.config();
 
 import appConf from './config/default/app.js'
 
