@@ -29,7 +29,6 @@
 
         // Dynamically insert the bundled app script in the renderer process
         const port = require("../config/default/app.js").app.port;
-        console.log(port);
         scripts.push(
           (require("../config/default/app.js").app.hot)
             ? 'http://localhost:' + port + '/dist/renderer.dev.js'
