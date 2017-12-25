@@ -13,14 +13,16 @@
 import { app, BrowserWindow } from 'electron';
 import MenuBuilder from './menu';
 
+import appConf from '../config/default/app.js'
+
 let mainWindow = null;
 
-if (process.env.NODE_ENV === 'production') {
+if (appConf.app.env === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
 }
 
-if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
+if (appConf.app.debug) {
   require('electron-debug')();
   const path = require('path');
   const p = path.join(__dirname, '..', 'app', 'node_modules');
@@ -55,7 +57,7 @@ app.on('window-all-closed', () => {
 
 
 app.on('ready', async () => {
-  if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
+  if (appConf.app.debug) {
     await installExtensions();
   }
 

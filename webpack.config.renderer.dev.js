@@ -17,9 +17,11 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import baseConfig from './webpack.config.base';
 import CheckNodeEnv from './internals/scripts/CheckNodeEnv';
 
+import appConf from './config/default/app.js';
+
 CheckNodeEnv('development');
 
-const port = process.env.PORT || 1212;
+const port = appConf.app.port;
 const publicPath = `http://localhost:${port}/dist`;
 const dll = path.resolve(process.cwd(), 'dll');
 const manifest = path.resolve(dll, 'renderer.json');
@@ -227,7 +229,7 @@ export default merge.smart(baseConfig, {
      * 'staging', for example, by changing the ENV variables in the npm scripts
      */
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+      'process.env.NODE_ENV': JSON.stringify(appConf.app.env || 'development')
     }),
 
     new webpack.LoaderOptionsPlugin({
@@ -265,7 +267,7 @@ export default merge.smart(baseConfig, {
       disableDotRule: false,
     },
     before() {
-      if (process.env.START_HOT) {
+      if (appConf.app.startHot) {
         console.log('Staring Main Process...');
         spawn(
           'npm',

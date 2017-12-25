@@ -5,7 +5,7 @@
     <title>Hello Electron React!</title>
     <script>
       (function() {
-        if (!process.env.HOT) {
+        if (!require("../config/default/app.js").app.hot) {
           const link = document.createElement('link');
           link.rel = 'stylesheet';
           link.href = './dist/style.css';
@@ -23,14 +23,15 @@
 
         // Dynamically insert the DLL script in development env in the
         // renderer process
-        if (process.env.NODE_ENV === 'development') {
+        if (require("../config/default/app.js").app.env === 'development') {
           scripts.push('../dll/renderer.dev.dll.js');
         }
 
         // Dynamically insert the bundled app script in the renderer process
-        const port = process.env.PORT || 1212;
+        const port = require("../config/default/app.js").app.port;
+        console.log(port);
         scripts.push(
-          (process.env.HOT)
+          (require("../config/default/app.js").app.hot)
             ? 'http://localhost:' + port + '/dist/renderer.dev.js'
             : './dist/renderer.prod.js'
         );

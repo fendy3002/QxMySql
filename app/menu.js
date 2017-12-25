@@ -1,6 +1,8 @@
 // @flow
 import { app, Menu, shell, BrowserWindow } from 'electron';
 
+import appConf from '../config/default/app.js'
+
 export default class MenuBuilder {
   mainWindow: BrowserWindow;
 
@@ -9,7 +11,7 @@ export default class MenuBuilder {
   }
 
   buildMenu() {
-    if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
+    if (appConf.app.debug) {
       this.setupDevelopmentEnvironment();
     }
 
@@ -103,7 +105,7 @@ export default class MenuBuilder {
       ]
     };
 
-    const subMenuView = process.env.NODE_ENV === 'development'
+    const subMenuView = appConf.app.env === 'development'
       ? subMenuViewDev
       : subMenuViewProd;
 
@@ -131,7 +133,7 @@ export default class MenuBuilder {
       }]
     }, {
       label: '&View',
-      submenu: (process.env.NODE_ENV === 'development') ? [{
+      submenu: (appConf.app.env === 'development') ? [{
         label: '&Reload',
         accelerator: 'Ctrl+R',
         click: () => {

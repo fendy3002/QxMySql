@@ -5,6 +5,10 @@
 import path from 'path';
 import webpack from 'webpack';
 import { dependencies as externals } from './app/package.json';
+import dotenv from "dotenv";
+dotenv.config();
+
+import appConf from './config/default/app.js'
 
 export default {
   externals: Object.keys(externals || {}),
@@ -42,7 +46,7 @@ export default {
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+      'process.env.NODE_ENV': JSON.stringify(appConf.app.env || 'production')
     }),
 
     new webpack.NamedModulesPlugin(),

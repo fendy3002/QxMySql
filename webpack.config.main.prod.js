@@ -9,6 +9,8 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import baseConfig from './webpack.config.base';
 import CheckNodeEnv from './internals/scripts/CheckNodeEnv';
 
+import appConf from './config/default/app.js';
+
 CheckNodeEnv('production');
 
 export default merge.smart(baseConfig, {
@@ -31,8 +33,8 @@ export default merge.smart(baseConfig, {
     new BabiliPlugin(),
 
     new BundleAnalyzerPlugin({
-      analyzerMode: process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',
-      openAnalyzer: process.env.OPEN_ANALYZER === 'true'
+      analyzerMode: appConf.app.openAnalyzer ? 'server' : 'disabled',
+      openAnalyzer: appConf.app.openAnalyzer
     }),
 
     /**
@@ -45,8 +47,8 @@ export default merge.smart(baseConfig, {
      * development checks
      */
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
-      'process.env.DEBUG_PROD': JSON.stringify(process.env.DEBUG_PROD || 'false')
+      'process.env.NODE_ENV': JSON.stringify(appConf.app.env || 'production'),
+      'process.env.DEBUG_PROD': JSON.stringify(appConf.app.debug || 'false')
     })
   ],
 

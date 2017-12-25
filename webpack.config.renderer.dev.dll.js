@@ -8,6 +8,7 @@ import merge from 'webpack-merge';
 import baseConfig from './webpack.config.base';
 import { dependencies } from './package.json';
 import CheckNodeEnv from './internals/scripts/CheckNodeEnv';
+import appConf from './config/default/app.js';
 
 CheckNodeEnv('development');
 
@@ -192,7 +193,7 @@ export default merge.smart(baseConfig, {
      * development checks
      */
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+      'process.env.NODE_ENV': JSON.stringify(appConf.app.env || 'development')
     }),
 
     new webpack.LoaderOptionsPlugin({
