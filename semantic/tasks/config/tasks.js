@@ -140,6 +140,7 @@ module.exports = {
       restructuring       : false,
       keepSpecialComments : 1,
       roundingPrecision   : -1,
+      rebase: false
     },
 
     /* Minified JS Settings */
@@ -156,6 +157,7 @@ module.exports = {
       restructuring       : false,
       keepSpecialComments : false,
       roundingPrecision   : -1,
+      rebase: false
     },
 
     /* Minified Concat JS */
