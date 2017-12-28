@@ -170,6 +170,8 @@
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.6",
     "semantic-ui": "^2.2.13",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.77.1",
     "sinon": "^2.3.5",
     "spectron": "^3.7.0",
     "style-loader": "^0.18.1",
@@ -197,8 +199,6 @@
     "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
-    "semantic-ui-css": "^2.2.12",
-    "semantic-ui-react": "^0.77.1",
     "source-map-support": "^0.4.15"
   },
   "devEngines": {

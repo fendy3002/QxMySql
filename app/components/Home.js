@@ -7,17 +7,27 @@ import ConnectModal from './ConnectModal.js';
 import uiConfig from '../../config/default/ui.js';
 
 export default class Home extends Component {
-  render() {
-    return (<div className="root theme black">
-        <SplitPane split="vertical" minSize={50} defaultSize={uiConfig.main.top} className="primary">
-          <div></div>
-          <SplitPane split="horizontal" defaultSize={uiConfig.main.left}>
-            <div></div>
-            <div></div>
-          </SplitPane>
-        </SplitPane>
+    constructor(props) {
+        super(props);
+        this.state = {
+            active: 0
+        };
 
-        <ConnectModal />
-      </div>);
-  }
+    }
+    render() {
+        let tabHeaders = [
+            <a className={"item wide " + (this.state.active == 0 ? "active" : "") }>
+                <i className="fa fa-wrench"></i>
+            </a>
+        ].concat([]);
+
+        return (<div className="main theme black">
+            <div className="ui top attached tabular menu">
+                {tabHeaders}
+            </div>
+            <div className="ui bottom attached active tab segment">
+                First
+            </div>
+        </div>);
+    }
 }

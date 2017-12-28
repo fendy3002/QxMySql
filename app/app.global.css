@@ -1,10 +1,35 @@
 @import "~font-awesome/css/font-awesome.css";
 @import '../semantic/dist/semantic.css';
 @import './css/splitpane.css';
-@import './css/splitpane.theme.css';
+@import './css/theme.css';
 
-body {
-  color: white;
-  background-color: #1B1C1D;
-  font-family: Arial, Helvetica, Helvetica Neue, serif;
+body{
+    font-family: Arial, Helvetica, Helvetica Neue, serif;
+}
+
+/*  ======
+    MAIN & TAB
+    ======= */
+
+.main {
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.main > .ui.top.tabular {
+    flex: 0 1 auto;
+}
+
+.main > .ui.top.tabular a.item{
+    padding: 4px 8px;
+}
+.main > .ui.top.tabular a.item.wide{
+    padding: 4px 16px;
+}
+
+.main > .ui.bottom.tab{
+    flex: 1 1 auto;
+    overflow: auto;
 }

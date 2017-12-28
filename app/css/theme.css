@@ -1,3 +1,16 @@
+/*  ======
+    BODY
+    ======= */
+
+body {
+    color: white;
+    background-color: #1B1C1D;
+}
+
+/*  ======
+    SPLIT PANE
+    ======= */
+
 .theme.black .Resizer {
     background: #ABACAD;
     opacity: 1;
@@ -23,4 +36,22 @@
 .theme.black .Resizer.horizontal:hover{
     background: #FFFFFF;
     z-index: 2;
+}
+
+/*  ======
+    TAB
+    ======= */
+
+.main.theme.black > .ui.top.tabular a.item{
+    background: #AFAFAF;
+}
+.main.theme.black > .ui.top.tabular a.item.active{
+    background: #FFFFFF;
+}
+.main.theme.black > .ui.top.tabular a.item:hover{
+    background: #DFDFDF;
+}
+
+.main.theme.black > .ui.bottom.tab {
+    background: #1B1C1D;
 }
