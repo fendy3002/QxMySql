@@ -1,10 +1,28 @@
 /*  ======
-    BODY
+    BODY & H
     ======= */
 
 body {
-    color: white;
+    color: #DFDFDF;
     background-color: #1B1C1D;
+}
+
+.theme.black h1,
+.theme.black h2,
+.theme.black h3,
+.theme.black h4,
+.theme.black h5,
+.theme.black h6 {
+    color: #DFDFDF;
+}
+
+.theme.black h1.dividing,
+.theme.black h2.dividing,
+.theme.black h3.dividing,
+.theme.black h4.dividing,
+.theme.black h5.dividing,
+.theme.black h6.dividing {
+    border-bottom-color: #DFDFDF;
 }
 
 /*  ======

@@ -4,39 +4,137 @@ import { Link } from 'react-router-dom';
 import SplitPane from 'react-split-pane';
 import uiConfig from '../../config/default/ui.js';
 
+let defaultConnection = {
+    name: "",
+    host: "",
+    port: "3306",
+    username: "",
+    password: ""
+};
+
 export default class ConnectModal extends Component {
-  render() {
-    return (
-        <div className="ui dimmer modals page transition visible active">
-            <div className="ui long test modal transition visible active scrolling" style={{ top: "100px" }}> 
-                <div className="header">
-                    Connect to MySql Server
-                </div>
-                <div className="image content">
-                    <form className="ui form container">
-                        <div className="two fields">
+    constructor(props){
+        super(props);
+        this.state = {
+            connection: defaultConnection
+        };
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    componentWillReceiveProps(newProps){
+        if(newProps.connection.name != this.props.connection.name){
+            this.setState((prevState, props) => {
+                return {
+                    connection: {
+                        ...newProps.connection,
+                        ...defaultConnection
+                    }
+                };
+            })
+        }
+    }
+
+    handleInputChange(event){
+        let {name, value} = event.target;
+
+        this.setState((prevState, props) => {
+            return {
+                connection: {
+                    ...prevState.connection,
+                    [name]: value
+                }
+            }
+        });
+    }
+
+    handleSubmit(event) {
+        let {mode, onSubmit} = this.props;
+
+        onSubmit({
+            target: {
+                value: this.state.connection,
+                name: this.props.name
+            }
+        });
+
+        event.preventDefault();
+        return false;
+    }
+
+    handleClose() {
+        let {onClose} = this.props;
+
+        this.setState((prevState, props) => {
+            return {
+                connection: defaultConnection
+            };
+        });
+        onClose();
+    }
+
+    render() {
+        let {visible} = this.props;
+        let {connection} = this.state;
+
+        let cssVisible = visible ? "visible active" : "";
+        return (
+            <div className={"ui dimmer modals page transition " + cssVisible}>
+                <div className="ui long test modal transition visible active" style={{ transform: "translateX(0%) translateY(-50%)" }}> 
+                    <div className="header">
+                        Connect to MySql Server
+
+                        <button type="button" className="ui tiny button" style={{ float: "right" }}
+                            onClick={this.handleClose}>
+                            <i className="fa fa-close"></i>
+                        </button>
+                    </div>
+                    <div className="image content">
+                        <form className="ui form container" onSubmit={this.handleSubmit}>
                             <div className="field">
-                                <label>Host</label>
-                                <input type="text" name="host" placeholder="Host" />
+                                <label>Connection Name</label>
+                                <input type="text" placeholder="e.g. MyLocalConnection" 
+                                    name="name"
+                                    onChange={this.handleInputChange}
+                                    value={connection.name} />
+                            </div>
+                            <div className="two fields">
+                                <div className="field">
+                                    <label>Host</label>
+                                    <input type="text" placeholder="Host" 
+                                        name="host"
+                                        onChange={this.handleInputChange}
+                                        value={connection.host} />
+                                </div>
+                                <div className="field">
+                                    <label>Port</label>
+                                    <input type="text" placeholder="Port" 
+                                        name="port"
+                                        onChange={this.handleInputChange}
+                                        value={connection.port} />
+                                </div>
                             </div>
                             <div className="field">
-                                <label>Port</label>
-                                <input type="text" name="port" placeholder="Port" />
+                                <label>Username</label>
+                                <input type="text" placeholder="Username" 
+                                    name="username"
+                                    onChange={this.handleInputChange}
+                                    value={connection.username} />
                             </div>
-                        </div>
-                        <div className="field">
-                            <label>Username</label>
-                            <input type="text" name="username" placeholder="Username" />
-                        </div>
-                        <div className="field">
-                            <label>Password</label>
-                            <input type="password" name="password" placeholder="Password" />
-                        </div>
-                        <button className="ui button" type="submit">Submit</button>
-                    </form>
+                            <div className="field">
+                                <label>Password</label>
+                                <input type="password" placeholder="Password" 
+                                    name="password"
+                                    onChange={this.handleInputChange}
+                                    value={connection.password} />
+                            </div>
+                            <button className="ui primary button" type="submit">Submit</button>
+                            <button className="ui button" type="button" onClick={this.handleClose}>Cancel</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    );
-  }
+        );
+    }
 }
