@@ -49,6 +49,8 @@ export default {
       'process.env.NODE_ENV': JSON.stringify(appConf.app.env || 'production')
     }),
 
+    new webpack.DefinePlugin({ "global.GENTLY": false }),
+    
     new webpack.NamedModulesPlugin(),
   ],
 };

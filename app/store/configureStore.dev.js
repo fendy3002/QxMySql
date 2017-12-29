@@ -9,7 +9,7 @@ import type { counterStateType } from '../reducers/counter';
 
 const history = createHashHistory();
 
-const configureStore = (initialState?: counterStateType) => {
+const configureStore = (initialState = {}) => {
   // Redux Configuration
   const middleware = [];
   const enhancers = [];

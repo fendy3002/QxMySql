@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SplitPane from 'react-split-pane';
 import ConnectionPage from './ConnectionPage.js';
+import {saveConnections} from '../actions/connection.js';
 
 import uiConfig from '../../config/default/ui.js';
 
@@ -18,12 +19,10 @@ export default class Home extends Component {
     }
 
     handleChange(event){
+        let {saveConnections} = this.props;
+        
         let {value} = event.target;
-        this.setState((prevState, props) => {
-            return {
-                connections: value
-            }
-        });
+        saveConnections(value);
     }
 
     render() {
@@ -32,8 +31,8 @@ export default class Home extends Component {
                 <i className="fa fa-wrench"></i>
             </a>
         ].concat([]);
-
-        let page = <ConnectionPage connections={this.state.connections} onChange={this.handleChange}/>;
+        console.log(this.props.request);
+        let page = <ConnectionPage connections={this.props.request.connections} onChange={this.handleChange}/>;
 
         return (<div className="main theme black">
             <div className="ui top attached tabular menu">

@@ -1,0 +1,1 @@
+export default require('@fendy3002/qz-node').default().require(__dirname, []);

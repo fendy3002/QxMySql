@@ -14,6 +14,13 @@ import { app, BrowserWindow } from 'electron';
 import MenuBuilder from './menu';
 
 import appConf from '../config/default/app.js'
+import qz from '@fendy3002/qz-node';
+
+import server from './server/index.js';
+import contextRaw from './server/context.js';
+let log = qz().logs.console();
+
+let serverApp = server(appConf, log);
 
 let mainWindow = null;
 

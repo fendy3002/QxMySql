@@ -185,6 +185,7 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
+    "@fendy3002/qz-node": "^0.1.11",
     "devtron": "^1.4.0",
     "dotenv": "^4.0.0",
     "electron-debug": "^1.2.0",
@@ -200,7 +201,8 @@
     "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
-    "source-map-support": "^0.4.15"
+    "source-map-support": "^0.4.15",
+    "superagent": "^3.8.2"
   },
   "devEngines": {
     "node": ">=7.x",

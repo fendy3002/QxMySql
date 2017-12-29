@@ -1,11 +1,27 @@
 // @flow
 import React, { Component } from 'react';
-import Home from '../components/Home';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class HomePage extends Component {
-  render() {
-    return (
-      <Home />
-    );
-  }
-}
+import Home from '../components/Home';
+import {saveConnections} from '../actions/connection.js';
+
+var mapStateToProps = function(state){
+  return {
+      request: state.request,
+      server: state.server
+  };
+};
+
+var mapDispatchToProps = function(dispatch, getState){
+  return {
+    saveConnections: bindActionCreators(saveConnections, dispatch)
+  };
+};
+
+var HomePage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
+
+export default HomePage;

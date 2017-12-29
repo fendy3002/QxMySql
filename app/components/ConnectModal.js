@@ -51,6 +51,7 @@ export default class ConnectModal extends Component {
 
     handleSubmit(event) {
         let {mode, onSubmit} = this.props;
+        event.preventDefault();
 
         onSubmit({
             target: {
@@ -59,7 +60,6 @@ export default class ConnectModal extends Component {
             }
         });
 
-        event.preventDefault();
         return false;
     }
 

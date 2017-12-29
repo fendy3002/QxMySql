@@ -4,9 +4,18 @@ import { AppContainer } from 'react-hot-loader';
 import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
 
+import context from './server/context.js';
 import './app.global.css';
 
-const store = configureStore();
+import {getConnections} from './actions/connection.js';
+
+const store = configureStore({
+  server: context,
+  request: {
+    connections: []
+  }
+});
+store.dispatch(getConnections());
 
 render(
   <AppContainer>
