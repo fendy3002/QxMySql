@@ -7,7 +7,8 @@ let context = {
     api: {
         connection: {
             insert: baseUrl + "/connection",
-            list: baseUrl + "/connection"
+            list: baseUrl + "/connection",
+            testConnection: baseUrl + "/connection/testconnection",
         },
         context: {
             get: baseUrl + "/context"

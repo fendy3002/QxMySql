@@ -19,6 +19,7 @@ export function saveConnections(connections){
                 console.log(err);
             }
             else{
+
             }
         })
     }
@@ -32,13 +33,13 @@ export function testConnection(connection){
                 connection: connection
             })
             .end((err, res) => {
-            if(err){
-                toastr.error("Test connection error", err);
-            }
-            else{
-                toastr.success("Connection success");
-            }
-        })
+                if(err){
+                    toastr.error("Test connection error", err);
+                }
+                else{
+                    toastr.success(res.body.message);
+                }
+            });
     }
 }
 

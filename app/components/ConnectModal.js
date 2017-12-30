@@ -8,7 +8,7 @@ let defaultConnection = {
     name: "",
     host: "",
     port: "3306",
-    username: "",
+    user: "",
     password: ""
 };
 
@@ -18,6 +18,7 @@ export default class ConnectModal extends Component {
         this.state = {
             connection: defaultConnection
         };
+
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -29,8 +30,8 @@ export default class ConnectModal extends Component {
             this.setState((prevState, props) => {
                 return {
                     connection: {
-                        ...newProps.connection,
-                        ...defaultConnection
+                        ...defaultConnection,
+                        ...newProps.connection
                     }
                 };
             })
@@ -76,7 +77,7 @@ export default class ConnectModal extends Component {
     }
 
     handleTestConnection(){
-        onTestConnection(this.state.connection);
+        this.props.testConnection(this.state.connection);
     }
 
     render() {
@@ -123,9 +124,9 @@ export default class ConnectModal extends Component {
                             <div className="field">
                                 <label>Username</label>
                                 <input type="text" placeholder="Username" 
-                                    name="username"
+                                    name="user"
                                     onChange={this.handleInputChange}
-                                    value={connection.username} />
+                                    value={connection.user} />
                             </div>
                             <div className="field">
                                 <label>Password</label>
@@ -135,7 +136,7 @@ export default class ConnectModal extends Component {
                                     value={connection.password} />
                             </div>
                             <button className="ui primary button" type="submit">Submit</button>
-                            <button className="ui button" onClick={this.handleTestConnection}>Test Connection</button>
+                            <button className="ui button" type="button" onClick={this.handleTestConnection}>Test Connection</button>
                             <button className="ui secondary button" type="button" onClick={this.handleClose}>Cancel</button>
                         </form>
                     </div>

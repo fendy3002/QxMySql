@@ -1,6 +1,6 @@
 @import "~font-awesome/css/font-awesome.css";
-@import '~react-redux-toastr/src/styles/index.scss';
 @import '../semantic/dist/semantic.css';
+@import './css/react-redux-toastr.min.css';
 @import './css/splitpane.css';
 @import './css/theme.css';
 

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SplitPane from 'react-split-pane';
-import ConnectModal from './ConnectModal.js';
+import StateConnectModal from '../containers/StateConnectModal.js';
 
 export default class ConnectionPage extends Component {
     constructor(props) {
@@ -54,12 +54,28 @@ export default class ConnectionPage extends Component {
         });
     }
 
+    updateConnection(connection) {
+        return (event) => {
+            this.setState(() => {
+                return {
+                    showConnectModal: true,
+                    connectModalData: connection
+                };
+            });
+        }
+    }
+
     render() {
         let {showConnectModal, connectModalData} = this.state;
         let {connections} = this.props;
         
         let connectionDoms = connections.map((connection, index) => {
-            return <div key={index}>{connection.name}</div>;
+            return <div key={index}>
+                {connection.name}
+                <button className="ui button tiny" onClick={this.updateConnection(connection)}>
+                    <i className="fa fa-wrench"></i>
+                </button>
+            </div>;
         });
         return [<div className="" key="0">
             <h2 className="ui dividing header">Connections</h2>
@@ -69,6 +85,6 @@ export default class ConnectionPage extends Component {
             </button>
             {connectionDoms}
         </div>, 
-        <ConnectModal visible={showConnectModal} onClose={this.closeModal} onSubmit={this.submitAdd} connection={connectModalData} key="1"/>];
+        <StateConnectModal visible={showConnectModal} onClose={this.closeModal} onSubmit={this.submitAdd} connection={connectModalData} key="1"/>];
     }
 }

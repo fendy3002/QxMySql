@@ -30,19 +30,23 @@ let Service = (config, log) => {
             })
         },
         _put: function(req, res, next) {
-            console.log(req.body);
             let connections = req.body.connections;
             fs.writeFile(
                 path.resolve(config.path.config, "user", "connection.json"),
                 JSON.stringify(connections), 
                 (err) => {
-                    console.log(err);
+                    if(err){
+                        console.log(err);
+                        res.status(500).json({
+                            message: err
+                        });
+                    } else {
+                        res.status(200).json({
+                            message: ""
+                        });
+                    }
                 }
             );
-
-            res.status(200).json({
-                message: ""
-            });
         }
     }
 };

@@ -44,7 +44,9 @@ export default class Home extends Component {
                 {page}
             </div>
 
-            <ReduxToastr />
+            <ReduxToastr 
+                position="bottom-right"
+                timeOut={4000}/>
         </div>);
     }
 }
