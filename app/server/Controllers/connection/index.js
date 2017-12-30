@@ -30,6 +30,8 @@ let Service = (config, log) => {
             })
         },
         _put: function(req, res, next) {
+            console.log(req.body);
+            let connections = req.body.connections;
             fs.writeFile(
                 path.resolve(config.path.config, "user", "connection.json"),
                 JSON.stringify(connections), 

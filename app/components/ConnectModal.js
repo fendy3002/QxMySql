@@ -21,6 +21,7 @@ export default class ConnectModal extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleTestConnection = this.handleTestConnection.bind(this);
     }
 
     componentWillReceiveProps(newProps){
@@ -72,6 +73,10 @@ export default class ConnectModal extends Component {
             };
         });
         onClose();
+    }
+
+    handleTestConnection(){
+        onTestConnection(this.state.connection);
     }
 
     render() {
@@ -130,7 +135,8 @@ export default class ConnectModal extends Component {
                                     value={connection.password} />
                             </div>
                             <button className="ui primary button" type="submit">Submit</button>
-                            <button className="ui button" type="button" onClick={this.handleClose}>Cancel</button>
+                            <button className="ui button" onClick={this.handleTestConnection}>Test Connection</button>
+                            <button className="ui secondary button" type="button" onClick={this.handleClose}>Cancel</button>
                         </form>
                     </div>
                 </div>

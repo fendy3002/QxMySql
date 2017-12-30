@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SplitPane from 'react-split-pane';
+import ReduxToastr from 'react-redux-toastr'
+
 import ConnectionPage from './ConnectionPage.js';
 import {saveConnections} from '../actions/connection.js';
 
@@ -41,6 +43,8 @@ export default class Home extends Component {
             <div className="ui bottom attached active tab segment">
                 {page}
             </div>
+
+            <ReduxToastr />
         </div>);
     }
 }

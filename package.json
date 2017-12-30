@@ -186,6 +186,7 @@
   },
   "dependencies": {
     "@fendy3002/qz-node": "^0.1.11",
+    "body-parser": "^1.18.2",
     "devtron": "^1.4.0",
     "dotenv": "^4.0.0",
     "electron-debug": "^1.2.0",
