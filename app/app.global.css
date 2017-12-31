@@ -30,6 +30,15 @@ body{
     padding: 4px 16px;
 }
 
+.main.theme.black > .ui.top.tabular a.item > i.close{
+    visibility: hidden;
+    margin-left: 8px;
+    margin-right: 0px;
+}
+.main.theme.black > .ui.top.tabular a.item:hover > i.close{
+    visibility: visible;
+}
+
 .main > .ui.bottom.tab{
     flex: 1 1 auto;
     overflow: auto;
