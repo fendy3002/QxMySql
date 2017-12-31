@@ -30,16 +30,53 @@ body{
     padding: 4px 16px;
 }
 
-.main.theme.black > .ui.top.tabular a.item > i.close{
+.main > .ui.top.tabular a.item > i.close{
     visibility: hidden;
     margin-left: 8px;
     margin-right: 0px;
 }
-.main.theme.black > .ui.top.tabular a.item:hover > i.close{
+.main > .ui.top.tabular a.item:hover > i.close{
     visibility: visible;
 }
 
 .main > .ui.bottom.tab{
+    flex: 1 1 auto;
+    overflow: auto;
+    margin-bottom: 0px;
+}
+
+
+/*  ======
+    RESULT PANEL TAB
+    ======= */
+
+.result-panel{
+    margin: 8px;
+}
+
+.result-panel > .ui.top.tabular {
+    flex: 0 1 auto;
+}
+
+.result-panel > .ui.top.tabular.menu {
+    flex: 0 1 auto;
+    min-height: 24px;
+}
+
+.result-panel > .ui.top.tabular a.item{
+    padding: 4px 8px;
+}
+
+.result-panel > .ui.top.tabular a.item > i.close{
+    visibility: hidden;
+    margin-left: 8px;
+    margin-right: 0px;
+}
+.result-panel > .ui.top.tabular a.item:hover > i.close{
+    visibility: visible;
+}
+
+.result-panel > .ui.bottom.tab{
     flex: 1 1 auto;
     overflow: auto;
     margin-bottom: 0px;

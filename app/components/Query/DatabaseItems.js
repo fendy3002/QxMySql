@@ -9,7 +9,7 @@ export default class DatabaseItems extends Component {
     render() {
         let {databases} = this.props;
         let databaseDoms = databases.map((database, index) => {
-            return <a className={"item " + ((index == 0) ? "active" : "")}>
+            return <a className={"item " + ((index == 0) ? "active" : "")} key={database}>
                 <i className="plus square outline icon"></i>
                 <i className="database icon"></i>
                 <div className="content">

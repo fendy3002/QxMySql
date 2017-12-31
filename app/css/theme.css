@@ -80,20 +80,20 @@ body {
     TAB
     ======= */
 
-.main.theme.black > .ui.top.tabular a.item{
+.main.theme.black .ui.top.tabular a.item{
     background: #AFAFAF;
 }
-.main.theme.black > .ui.top.tabular a.item.active{
+.main.theme.black .ui.top.tabular a.item.active{
     background: #FFFFFF;
 }
-.main.theme.black > .ui.top.tabular a.item:hover{
+.main.theme.black .ui.top.tabular a.item:hover{
     background: #DFDFDF;
 }
-.main.theme.black > .ui.top.tabular a.item > i.close:hover{
+.main.theme.black .ui.top.tabular a.item > i.close:hover{
     color: #880000;
 }
 
-.main.theme.black > .ui.bottom.tab {
+.main.theme.black .ui.bottom.tab {
     background: #1B1C1D;
 }
 
