@@ -120,3 +120,29 @@ body {
 .main.theme.black .ui.card>.content>.meta{
     color: #AAAAAA;
 }
+
+
+/*  ======
+    SIDEBAR MENU
+    ======= */
+
+.main.theme.black .ui.sidebar {
+    color: #DFDFDF;
+    border-color: #DFDFDF;
+    background-color: #1B1C1D;
+}
+.main.theme.black .ui.sidebar .item {
+    color: #AAAAAA;
+    border-color: #DFDFDF;
+}
+.main.theme.black .ui.sidebar .item:before {
+    background: #606060;
+}
+.main.theme.black .ui.sidebar .item:hover {
+    color: #FFFFFF;
+    background: #AAAAAA;
+}
+
+.main.theme.black .ui.sidebar .item.active {
+    color: #FFFFFF;
+}

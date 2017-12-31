@@ -42,4 +42,5 @@ body{
 .main > .ui.bottom.tab{
     flex: 1 1 auto;
     overflow: auto;
+    margin-bottom: 0px;
 }

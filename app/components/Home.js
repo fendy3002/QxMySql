@@ -124,7 +124,7 @@ export default class Home extends Component {
             <div className="ui top attached tabular menu">
                 {tabHeaders}
             </div>
-            <div className="ui bottom attached active tab segment">
+            <div className="ui bottom attached active tab segment" style={{padding: 0}}>
                 {page}
             </div>
 

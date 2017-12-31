@@ -136,7 +136,7 @@ export default class ConnectionPage extends Component {
                 </div>
             </div>;
         });
-        return [<div className="" key="0">
+        return [<div className="" key="0" style={{ margin: "1em" }}>
             <div className="ui segment vertical">
                 <h2 className="ui dividing header">Connections</h2>
                 <button type="button" className="ui button tiny"
