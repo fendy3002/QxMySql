@@ -26,6 +26,26 @@ body {
 }
 
 /*  ======
+    SCROLLBAR
+    ======= */
+::-webkit-scrollbar-track-piece,
+.theme.black .ui.tab::-webkit-scrollbar-track-piece {
+    background-color:#AAAAAA;
+}
+::-webkit-scrollbar-track-piece:hover,
+.theme.black .ui.tab::-webkit-scrollbar-track-piece:hover {
+    background-color:#BABABA;
+}
+::-webkit-scrollbar-thumb,
+.theme.black .ui.tab::-webkit-scrollbar-thumb {
+    background:#DFDFDF;
+}
+::-webkit-scrollbar-thumb:hover,
+.theme.black .ui.tab::-webkit-scrollbar-thumb:hover {
+    background:#FFFFFF;
+}
+
+/*  ======
     SPLIT PANE
     ======= */
 
@@ -72,4 +92,28 @@ body {
 
 .main.theme.black > .ui.bottom.tab {
     background: #1B1C1D;
+}
+
+/*  ======
+    CARD
+    ======= */
+
+.main.theme.black .ui.cards>.card,
+.main.theme.black .ui.card{
+    color: #DFDFDF;
+    background-color: #1B1C1D;
+    box-shadow: 0px 1px 3px 0px #AAAAAA, 0px 0px 0px 1px #AAAAAA;
+}
+.main.theme.black .ui.cards>.card>.content,
+.main.theme.black .ui.card>.content{
+    color: #DFDFDF;
+    border-top-color: #AAAAAA;
+}
+.main.theme.black .ui.cards>.card>.content>.header,
+.main.theme.black .ui.card>.content>.header{
+    color: #DFDFDF;
+}
+.main.theme.black .ui.cards>.card>.content>.meta,
+.main.theme.black .ui.card>.content>.meta{
+    color: #AAAAAA;
 }

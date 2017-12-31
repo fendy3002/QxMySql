@@ -98,21 +98,37 @@ export default class ConnectionPage extends Component {
         let {connections} = this.props;
         
         let connectionDoms = connections.map((connection, index) => {
-            return <div key={index}>
-                {connection.name}
-                <button className="ui button tiny" onClick={this.updateConnection(connection, index)}>
-                    <i className="fa fa-wrench"></i>
-                </button>
+            return <div className="card" key={index}>
+                <div className="content">
+                    <div className="header">
+                        {connection.name}
+                    </div>
+                    <div className="meta">
+                        {connection.host}
+                    </div>
+                </div>
+                <div className="content">
+                    <button className="ui button compact mini" onClick={this.updateConnection(connection, index)}>
+                        <i className="fa fa-wrench"></i>
+                    </button>
+                </div>
             </div>;
         });
         return [<div className="" key="0">
-            <h2 className="ui dividing header">Connections</h2>
-            <button type="button" className="ui button tiny"
-                onClick={this.addConnection}>
-                <i className="fa fa-plus"></i>
-            </button>
-            {connectionDoms}
+            <div className="ui segment vertical">
+                <h2 className="ui dividing header">Connections</h2>
+                <button type="button" className="ui button tiny"
+                    onClick={this.addConnection}>
+                    <i className="fa fa-plus"></i>
+                </button>
+            </div>
+            <div className="ui segment vertical">
+                <div className="ui stackable cards">
+                    {connectionDoms}
+                </div>
+            </div>
         </div>, 
-        <StateConnectModal visible={showConnectModal} onClose={this.closeModal} onSubmit={connectModalOnSubmit} connection={connectModalData} key="1"/>];
+        <StateConnectModal visible={showConnectModal} onClose={this.closeModal} 
+            onSubmit={connectModalOnSubmit} connection={connectModalData} key="1"/>];
     }
 }
