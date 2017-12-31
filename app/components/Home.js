@@ -76,13 +76,15 @@ export default class Home extends Component {
     }
 
     handleOpenQuery(connection){
-        let {testConnection} = this.props;
-        testConnection(connection, (err, response) => {
+        let {openConnection} = this.props;
+        openConnection(connection, (err, response) => {
             if(!err){
+                let databases = response.data.databases;
                 this.setState((prevState, props) => {
                     return {
                         openQueries: prevState.openQueries.concat({
-                            connection: connection
+                            connection: connection,
+                            databases: databases
                         }),
                         active: prevState.openQueries.length + 1
                     };

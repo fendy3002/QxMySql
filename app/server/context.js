@@ -9,6 +9,7 @@ let context = {
             insert: baseUrl + "/connection",
             list: baseUrl + "/connection",
             testConnection: baseUrl + "/connection/testconnection",
+            openConnection: baseUrl + "/connection/openconnection",
         },
         context: {
             get: baseUrl + "/context"

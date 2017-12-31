@@ -101,23 +101,23 @@ body {
     CARD
     ======= */
 
-.main.theme.black .ui.cards>.card,
+.main.theme.black .ui.cards > .card,
 .main.theme.black .ui.card{
     color: #DFDFDF;
     background-color: #1B1C1D;
     box-shadow: 0px 1px 3px 0px #AAAAAA, 0px 0px 0px 1px #AAAAAA;
 }
-.main.theme.black .ui.cards>.card>.content,
-.main.theme.black .ui.card>.content{
+.main.theme.black .ui.cards > .card > .content,
+.main.theme.black .ui.card > .content{
     color: #DFDFDF;
     border-top-color: #AAAAAA;
 }
-.main.theme.black .ui.cards>.card>.content>.header,
-.main.theme.black .ui.card>.content>.header{
+.main.theme.black .ui.cards > .card > .content > .header,
+.main.theme.black .ui.card > .content > .header{
     color: #DFDFDF;
 }
-.main.theme.black .ui.cards>.card>.content>.meta,
-.main.theme.black .ui.card>.content>.meta{
+.main.theme.black .ui.cards > .card > .content > .meta,
+.main.theme.black .ui.card > .content > .meta{
     color: #AAAAAA;
 }
 
@@ -144,5 +144,30 @@ body {
 }
 
 .main.theme.black .ui.sidebar .item.active {
+    color: #FFFFFF;
+}
+
+/*  ======
+    LIST
+    ======= */
+
+.main.theme.black .ui.list .item{
+    color: #AAAAAA;
+}
+.main.theme.black .ui.list .item > .icon, 
+.main.theme.black .ui.list .item > .content,
+.main.theme.black .ui.list .item > .content > .header {
+    color: #AAAAAA;
+}
+
+.main.theme.black .ui.list .item.active > .icon, 
+.main.theme.black .ui.list .item.active > .content,
+.main.theme.black .ui.list .item.active > .content > .header {
+    color: #FFFFFF;
+}
+
+.main.theme.black .ui.list .item:hover > .icon,
+.main.theme.black .ui.list .item:hover > .content,
+.main.theme.black .ui.list .item:hover > .content > .header{
     color: #FFFFFF;
 }

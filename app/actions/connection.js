@@ -43,6 +43,24 @@ export function testConnection(connection, onNext = (() => {})){
     }
 }
 
+export function openConnection(connection, onNext = (() => {})){
+    return (dispatch, getState) => {
+        let {server} = getState();
+        sa.post(server.api.connection.openConnection)
+            .send({
+                connection: connection
+            })
+            .end((err, res) => {
+                if(err){
+                    onNext(err);
+                }
+                else{
+                    onNext(null, res.body);
+                }
+            });
+    }
+}
+
 export function getConnections(){
     return (dispatch, getState) => {
         let {server} = getState();
