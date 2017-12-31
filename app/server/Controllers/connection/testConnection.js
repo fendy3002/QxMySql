@@ -11,7 +11,7 @@ let Service = (config, log) => {
                 if(err){
                     console.log(err);
                     res.status(500).json({
-                        message: err.sqlMessage
+                        message: err.sqlMessage || err.toString()
                     });
                 }
                 else{

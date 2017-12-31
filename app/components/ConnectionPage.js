@@ -9,12 +9,15 @@ export default class ConnectionPage extends Component {
         super(props);
         this.state = {
             showConnectModal: false,
-            connectModalData: {}
+            connectModalData: {},
+            connectModalOnSubmit: this.submitAdd,
+            connectModalConnectionIndex: 0
         };
 
         this.closeModal = this.closeModal.bind(this);
         this.addConnection = this.addConnection.bind(this);
         this.submitAdd = this.submitAdd.bind(this);
+        this.submitUpdate = this.submitUpdate.bind(this);
     }
 
     closeModal() {
@@ -29,7 +32,8 @@ export default class ConnectionPage extends Component {
         this.setState(() => {
             return {
                 showConnectModal: true,
-                connectModalData: {}
+                connectModalData: {},
+                connectModalOnSubmit: this.submitAdd
             };
         });
     }
@@ -54,25 +58,49 @@ export default class ConnectionPage extends Component {
         });
     }
 
-    updateConnection(connection) {
+    updateConnection(connection, index) {
         return (event) => {
             this.setState(() => {
                 return {
                     showConnectModal: true,
-                    connectModalData: connection
+                    connectModalData: connection,
+                    connectModalConnectionIndex: index,
+                    connectModalOnSubmit: this.submitUpdate
                 };
             });
         }
     }
 
+    submitUpdate(event) {
+        let {connectModalConnectionIndex} = this.state; 
+        let {onChange} = this.props;
+        let {value} = event.target;
+
+        let connections = this.props.connections;
+        connections[connectModalConnectionIndex] = value;
+
+        onChange({
+            target:{
+                name: this.props.name,
+                value: connections
+            }
+        });
+        this.setState(() => {
+            return {
+                showConnectModal: false,
+                connectModalData: {}
+            };
+        });
+    }
+
     render() {
-        let {showConnectModal, connectModalData} = this.state;
+        let {showConnectModal, connectModalData, connectModalOnSubmit} = this.state;
         let {connections} = this.props;
         
         let connectionDoms = connections.map((connection, index) => {
             return <div key={index}>
                 {connection.name}
-                <button className="ui button tiny" onClick={this.updateConnection(connection)}>
+                <button className="ui button tiny" onClick={this.updateConnection(connection, index)}>
                     <i className="fa fa-wrench"></i>
                 </button>
             </div>;
@@ -85,6 +113,6 @@ export default class ConnectionPage extends Component {
             </button>
             {connectionDoms}
         </div>, 
-        <StateConnectModal visible={showConnectModal} onClose={this.closeModal} onSubmit={this.submitAdd} connection={connectModalData} key="1"/>];
+        <StateConnectModal visible={showConnectModal} onClose={this.closeModal} onSubmit={connectModalOnSubmit} connection={connectModalData} key="1"/>];
     }
 }
