@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Home from '../components/Home';
-import {saveConnections} from '../actions/connection.js';
+import {saveConnections, testConnection} from '../actions/connection.js';
 
 var mapStateToProps = function(state){
   return {
@@ -15,7 +15,8 @@ var mapStateToProps = function(state){
 
 var mapDispatchToProps = function(dispatch, getState){
   return {
-    saveConnections: bindActionCreators(saveConnections, dispatch)
+    saveConnections: bindActionCreators(saveConnections, dispatch),
+    testConnection: bindActionCreators(testConnection, dispatch)
   };
 };
 

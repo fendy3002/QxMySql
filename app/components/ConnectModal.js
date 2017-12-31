@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SplitPane from 'react-split-pane';
 import uiConfig from '../../config/default/ui.js';
+import {toastr} from 'react-redux-toastr';
 
 let defaultConnection = {
     name: "",
@@ -26,7 +27,7 @@ export default class ConnectModal extends Component {
     }
 
     componentWillReceiveProps(newProps){
-        if(newProps.connection.name != this.props.connection.name){
+        if(newProps.connection != this.props.connection){
             this.setState((prevState, props) => {
                 return {
                     connection: {
@@ -77,7 +78,14 @@ export default class ConnectModal extends Component {
     }
 
     handleTestConnection(){
-        this.props.testConnection(this.state.connection);
+        this.props.testConnection(this.state.connection, (err, res) => {
+            if(err){
+                toastr.error("Test connection error", err);
+            }
+            else{
+                toastr.success(res.message);
+            }
+        });
     }
 
     render() {
@@ -100,10 +108,16 @@ export default class ConnectModal extends Component {
                         <form className="ui form container" onSubmit={this.handleSubmit}>
                             <div className="field">
                                 <label>Connection Name</label>
-                                <input type="text" placeholder="e.g. MyLocalConnection" 
-                                    name="name"
-                                    onChange={this.handleInputChange}
-                                    value={connection.name} />
+                                <div className="ui corner labeled input">
+                                    <input type="text" placeholder="e.g. MyLocalConnection" 
+                                        name="name"
+                                        onChange={this.handleInputChange}
+                                        value={connection.name} />
+                                    <div className="ui corner label">
+                                        <i className="asterisk icon"></i>
+                                    </div>
+                                </div>
+
                             </div>
                             <div className="two fields">
                                 <div className="field">

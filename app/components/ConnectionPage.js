@@ -16,6 +16,7 @@ export default class ConnectionPage extends Component {
 
         this.closeModal = this.closeModal.bind(this);
         this.addConnection = this.addConnection.bind(this);
+        this.removeConnection = this.removeConnection.bind(this);
         this.submitAdd = this.submitAdd.bind(this);
         this.submitUpdate = this.submitUpdate.bind(this);
     }
@@ -93,16 +94,31 @@ export default class ConnectionPage extends Component {
         });
     }
 
+    removeConnection(index){
+        let {connections, onChange} = this.props;
+        if(confirm("Are you sure to delete connection " + connections[index].name + "?")){
+            connections.splice(index, 1);
+            onChange({
+                target:{
+                    name: this.props.name,
+                    value: connections
+                }
+            });
+        }
+    }
+
     render() {
         let {showConnectModal, connectModalData, connectModalOnSubmit} = this.state;
-        let {connections} = this.props;
+        let {connections, onOpenConnection} = this.props;
         
         let connectionDoms = connections.map((connection, index) => {
             return <div className="card" key={index}>
                 <div className="content">
                     <div className="header">
                         {connection.name}
-                        <button className="ui button red compact mini right floated">
+                        <button className="ui button red compact mini right floated"
+                            type="button"
+                            onClick={() => this.removeConnection(index)}>
                             <i className="fa fa-remove"></i>
                         </button>
                     </div>
@@ -111,7 +127,7 @@ export default class ConnectionPage extends Component {
                     </div>
                 </div>
                 <div className="content">
-                    <button className="ui button primary compact mini">
+                    <button className="ui button primary compact mini" onClick={() => onOpenConnection(connection)}>
                         <i className="fa fa-link"></i> Connect
                     </button>
                     <button className="ui button green compact mini" onClick={this.updateConnection(connection, index)}>

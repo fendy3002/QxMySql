@@ -25,7 +25,7 @@ export function saveConnections(connections){
     }
 }
 
-export function testConnection(connection){
+export function testConnection(connection, onNext = (() => {})){
     return (dispatch, getState) => {
         let {server} = getState();
         sa.post(server.api.connection.testConnection)
@@ -34,10 +34,10 @@ export function testConnection(connection){
             })
             .end((err, res) => {
                 if(err){
-                    toastr.error("Test connection error", err);
+                    onNext(err);
                 }
                 else{
-                    toastr.success(res.body.message);
+                    onNext(null, res.body);
                 }
             });
     }
