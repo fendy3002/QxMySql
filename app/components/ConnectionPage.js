@@ -102,13 +102,19 @@ export default class ConnectionPage extends Component {
                 <div className="content">
                     <div className="header">
                         {connection.name}
+                        <button className="ui button red compact mini right floated">
+                            <i className="fa fa-remove"></i>
+                        </button>
                     </div>
                     <div className="meta">
                         {connection.host}
                     </div>
                 </div>
                 <div className="content">
-                    <button className="ui button compact mini" onClick={this.updateConnection(connection, index)}>
+                    <button className="ui button primary compact mini">
+                        <i className="fa fa-link"></i> Connect
+                    </button>
+                    <button className="ui button green compact mini" onClick={this.updateConnection(connection, index)}>
                         <i className="fa fa-wrench"></i>
                     </button>
                 </div>

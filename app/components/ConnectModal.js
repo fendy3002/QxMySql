@@ -89,7 +89,7 @@ export default class ConnectModal extends Component {
             <div className={"ui dimmer modals page transition " + cssVisible}>
                 <div className="ui long test modal transition visible active" style={{ transform: "translateX(0%) translateY(-50%)" }}> 
                     <div className="header">
-                        Connect to MySql Server
+                        MySql Server Connection
 
                         <button type="button" className="ui tiny button" style={{ float: "right" }}
                             onClick={this.handleClose}>

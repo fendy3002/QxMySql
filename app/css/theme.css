@@ -30,19 +30,19 @@ body {
     ======= */
 ::-webkit-scrollbar-track-piece,
 .theme.black .ui.tab::-webkit-scrollbar-track-piece {
-    background-color:#AAAAAA;
+    background-color:#404040;
 }
 ::-webkit-scrollbar-track-piece:hover,
 .theme.black .ui.tab::-webkit-scrollbar-track-piece:hover {
-    background-color:#BABABA;
+    background-color:#606060;
 }
 ::-webkit-scrollbar-thumb,
 .theme.black .ui.tab::-webkit-scrollbar-thumb {
-    background:#DFDFDF;
+    background:#AAAAAA;
 }
 ::-webkit-scrollbar-thumb:hover,
 .theme.black .ui.tab::-webkit-scrollbar-thumb:hover {
-    background:#FFFFFF;
+    background:#DFDFDF;
 }
 
 /*  ======
