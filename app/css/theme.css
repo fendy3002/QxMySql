@@ -89,6 +89,9 @@ body {
 .main.theme.black > .ui.top.tabular a.item:hover{
     background: #DFDFDF;
 }
+.main.theme.black > .ui.top.tabular a.item > i.close:hover{
+    color: #880000;
+}
 
 .main.theme.black > .ui.bottom.tab {
     background: #1B1C1D;

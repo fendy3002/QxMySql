@@ -49,9 +49,8 @@ export default class Home extends Component {
 
             openQueries.splice(index, 1);
             return {
-                active: 0,
-                openQueries: openQueries,
-                active: newActive
+                active: newActive,
+                openQueries: openQueries
             };
         });
     }
@@ -105,6 +104,15 @@ export default class Home extends Component {
                 onContextMenu={this.handleTabContextMenu(index)}
                 onClick={() => {this.handleTabChange(index + 1)}}>
                 {openQuery.connection.name}
+
+                <i className="close icon" 
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.handleTabClose(index);
+                        return false;
+                    }}>
+                </i>
             </a>
         }));
 

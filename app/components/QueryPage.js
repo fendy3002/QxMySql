@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SplitPane from 'react-split-pane';
 import StateConnectModal from '../containers/StateConnectModal.js';
 
-export default class ConnectionPage extends Component {
+export default class QueryPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
