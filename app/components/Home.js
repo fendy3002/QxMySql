@@ -5,7 +5,7 @@ import SplitPane from 'react-split-pane';
 import ReduxToastr from 'react-redux-toastr'
 
 import ConnectionPage from './ConnectionPage.js';
-import QueryPage from './QueryPage.js';
+import StateQueryPage from '../containers/StateQueryPage.js';
 import {saveConnections} from '../actions/connection.js';
 
 import { remote } from 'electron';
@@ -158,7 +158,7 @@ export default class Home extends Component {
 
         let page = (active == 0) ?
             <ConnectionPage connections={this.props.request.connections} onOpenConnection={this.handleOpenQuery} onChange={this.handleChangeConnection}/> :
-            <QueryPage openQuery={openQueries[active - 1]} onChange={this.handleOpenQueryChange}/>;
+            <StateQueryPage openQuery={openQueries[active - 1]} onChange={this.handleOpenQueryChange}/>;
 
         return (<div className="main theme black">
             <div className="ui top attached tabular menu">

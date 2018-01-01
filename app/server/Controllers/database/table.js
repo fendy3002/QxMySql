@@ -36,7 +36,7 @@ let Table = (config, log) => {
     };
 
     return {
-        _get: function(req, res, next) {
+        _post: function(req, res, next) {
             let connection = req.body.connection;
             let dbname = req.body.dbname;
             let tablename = req.body.tablename;

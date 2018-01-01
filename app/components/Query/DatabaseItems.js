@@ -11,19 +11,58 @@ class Tables extends Component {
         this.handleExpand = this.handleExpand.bind(this);
     }
     handleExpand(event){
-        let {database, onChange} = this.props;
+        let {connection, database, onChange, onGetTables} = this.props;
         let {tables} = database;
         
         tables.expanded = !tables.expanded;
-        onChange({
-            target:{
-                name: this.props.name,
-                value: tables
-            }
-        });
+        if(!tables.fetched){
+            onGetTables(connection, database.name, (err, result) => {
+                tables.fetched = true;
+                if(!err){
+                    tables.data = result.data.tables;
+                    console.log(result.data);
+                }
+                else{
+                    console.log(err)
+                }
+                onChange({
+                    target:{
+                        name: this.props.name,
+                        value: tables
+                    }
+                });
+            });
+        }
+        else{
+            onChange({
+                target:{
+                    name: this.props.name,
+                    value: tables
+                }
+            });
+        }
     }
     render() {
         let {database} = this.props;
+        let {tables} = database;
+
+        let getTableRow = (table) => {
+            return <div className={"item"} key={database.name + "_table" + "_" + table}>
+                <div className="content">
+                    <div className="header">
+                        <i className={"table icon"}></i>
+                        {table}
+                    </div>
+                </div>
+            </div>
+        };
+
+        let tableItems = (tables.expanded && tables.data.length > 0) ?
+            <div className="list">
+                {tables.data.map((table, index) => getTableRow(table))}
+            </div> :
+            null;
+            
         return <div className={"item"} key={database.name + "_table"}>
             <i className={expandIcon(database.tables.expanded) + " square outline icon"} 
                 onClick={this.handleExpand}></i>
@@ -31,6 +70,7 @@ class Tables extends Component {
                 <div className="header">
                     <i className={"table icon"}></i> Tables
                 </div>
+                {tableItems}
             </div>
         </div>;
     }
@@ -81,7 +121,7 @@ export default class DatabaseItems extends Component {
     }
 
     render() {
-        let {databases} = this.props;
+        let {databases, getTables, openQuery} = this.props;
         let databaseDoms = databases.map((database, index) => {
             return <div className={"item " + ((index == 0) ? "active" : "")} key={database.name}>
                 <i className={expandIcon(database.expanded) + " square outline icon"} onClick={this.handleExpand(index)}></i>
@@ -91,7 +131,9 @@ export default class DatabaseItems extends Component {
                         {database.name}
                     </a>
                     {database.expanded && <div className="list">
-                        <Tables database={database} name="tables" onChange={this.handleChange(index)}/>
+                        <Tables database={database} connection={openQuery.connection} name="tables" 
+                            onChange={this.handleChange(index)}
+                            onGetTables={getTables}/>
                         <div className={"item"} key={database.name + "_view"}>
                             <i className={"folder icon"}></i>
                             <div className="content">
