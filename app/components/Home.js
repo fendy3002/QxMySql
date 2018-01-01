@@ -111,9 +111,6 @@ export default class Home extends Component {
                         openQueries: prevState.openQueries.concat({
                             connection: connection,
                             databases: databases,
-                            histories: [],
-                            activeDatabase: "",
-                            activeQuery: 0,
                             queries: [{
                                 sending: false,
                                 title: "Query 1",

@@ -8,12 +8,13 @@ let context = {
         connection: {
             insert: baseUrl + "/connection",
             list: baseUrl + "/connection",
+            systemVariable: baseUrl + "/connection/systemvariable",
             testConnection: baseUrl + "/connection/testconnection",
             openConnection: baseUrl + "/connection/openconnection",
         },
         database: {
+            table: baseUrl + "/database/table",
             tables: baseUrl + "/database/tables",
-            table: baseUrl + "/database/table"
         },
         context: {
             get: baseUrl + "/context"

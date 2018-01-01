@@ -60,6 +60,24 @@ export function openConnection(connection, onNext = (() => {})){
             });
     }
 }
+export function getSystemVariables(connection, name, onNext = (() => {})){
+    return (dispatch, getState) => {
+        let {server} = getState();
+        sa.post(server.api.connection.systemVariable)
+            .send({
+                connection: connection,
+                name: name
+            })
+            .end((err, res) => {
+                if(err){
+                    onNext(err, res);
+                }
+                else{
+                    onNext(null, res.body);
+                }
+            });
+    }
+}
 
 export function getConnections(){
     return (dispatch, getState) => {

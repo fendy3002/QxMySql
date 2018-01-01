@@ -8,6 +8,7 @@ let log = qz.logs.console();
 let Service = (config, log) => {
     router.get('/', controllers.connection.index(config, log)._get);
     router.put('/', controllers.connection.index(config, log)._put);
+    router.post('/systemvariable', controllers.connection.systemVariable(config, log)._post);
     router.post('/testconnection', controllers.connection.testConnection(config, log)._post);
     router.post('/openconnection', controllers.connection.openConnection(config, log)._post);
 

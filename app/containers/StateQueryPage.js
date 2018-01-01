@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import QueryPage from '../components/QueryPage';
 import {getTables} from '../actions/database.js';
+import {getSystemVariables} from '../actions/connection.js';
 
 var mapStateToProps = function(state){
   return {
@@ -13,7 +14,8 @@ var mapStateToProps = function(state){
 
 var mapDispatchToProps = function(dispatch, getState){
   return {
-    getTables: bindActionCreators(getTables, dispatch)
+    getTables: bindActionCreators(getTables, dispatch),
+    getSystemVariables: bindActionCreators(getSystemVariables, dispatch)
   };
 };
 
