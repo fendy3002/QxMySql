@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SplitPane from 'react-split-pane';
 import Sidebar from './Query/Sidebar.js';
 import DatabaseItems from './Query/DatabaseItems.js';
-import Editor from './Query/Editor.js';
+import EditorPages from './Query/EditorPages.js';
 import ResultPanel from './Query/ResultPanel.js';
 
 export default class QueryPage extends Component {
@@ -37,7 +37,7 @@ export default class QueryPage extends Component {
                     <DatabaseItems openQuery={openQuery} databases={openQuery.databases} onChange={this.handleChange} name="databases" 
                         getTables={getTables}/>
                     <SplitPane split="horizontal" minSize={150} defaultSize={400}>
-                        <Editor />
+                        <EditorPages openQuery={openQuery} />
                         <ResultPanel />
                     </SplitPane>
                 </SplitPane>

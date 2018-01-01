@@ -19,64 +19,31 @@ body{
     width: 100vw;
 }
 
-.main > .ui.top.tabular {
+.ui.top.tabular {
     flex: 0 1 auto;
 }
 
-.main > .ui.top.tabular a.item{
-    padding: 4px 8px;
-}
-.main > .ui.top.tabular a.item.wide{
-    padding: 4px 16px;
-}
-
-.main > .ui.top.tabular a.item > i.close{
-    visibility: hidden;
-    margin-left: 8px;
-    margin-right: 0px;
-}
-.main > .ui.top.tabular a.item:hover > i.close{
-    visibility: visible;
-}
-
-.main > .ui.bottom.tab{
-    flex: 1 1 auto;
-    overflow: auto;
-    margin-bottom: 0px;
-}
-
-
-/*  ======
-    RESULT PANEL TAB
-    ======= */
-
-.result-panel{
-    margin: 8px;
-}
-
-.result-panel > .ui.top.tabular {
-    flex: 0 1 auto;
-}
-
-.result-panel > .ui.top.tabular.menu {
-    flex: 0 1 auto;
+.ui.top.tabular.menu {
     min-height: 24px;
 }
 
-.result-panel > .ui.top.tabular a.item{
+.ui.top.tabular a.item{
     padding: 4px 8px;
 }
+.ui.top.tabular a.item.wide{
+    padding: 4px 16px;
+}
 
-.result-panel > .ui.top.tabular a.item > i.close{
+.ui.top.tabular a.item > i.close{
     visibility: hidden;
     margin-left: 8px;
     margin-right: 0px;
 }
-.result-panel > .ui.top.tabular a.item:hover > i.close{
+.ui.top.tabular a.item:hover > i.close{
     visibility: visible;
 }
 
-.result-panel > .ui.bottom.tab{
+.ui.bottom.tab{
     flex: 1 1 auto;
     overflow: auto;
     margin-bottom: 0px;
