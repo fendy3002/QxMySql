@@ -23,6 +23,7 @@ export default class Home extends Component {
         };
 
         this.handleChangeConnection = this.handleChangeConnection.bind(this);
+        this.handleOpenQueryChange = this.handleOpenQueryChange.bind(this);
         this.handleOpenQuery = this.handleOpenQuery.bind(this);
         this.handleTabChange = this.handleTabChange.bind(this);
         this.handleTabClose = this.handleTabClose.bind(this);
@@ -79,7 +80,32 @@ export default class Home extends Component {
         let {openConnection} = this.props;
         openConnection(connection, (err, response) => {
             if(!err){
-                let databases = response.data.databases;
+                let databases = response.data.databases.map((database, index) => {
+                    return {
+                        name: database,
+                        expanded: false,
+                        tables: {
+                            fetched: false,
+                            expanded: false,
+                            data: []
+                        },
+                        views: {
+                            fetched: false,
+                            expanded: false,
+                            data: []
+                        },
+                        procedures: {
+                            fetched: false,
+                            expanded: false,
+                            data: []
+                        },
+                        functions: {
+                            fetched: false,
+                            expanded: false,
+                            data: []
+                        }
+                    }
+                });
                 this.setState((prevState, props) => {
                     return {
                         openQueries: prevState.openQueries.concat({
@@ -90,6 +116,18 @@ export default class Home extends Component {
                     };
                 });
             }
+        });
+    }
+
+    handleOpenQueryChange(event){
+        let {value} = event.target;
+
+        this.setState((prevState, props) => {
+            let {openQueries, active} = prevState;
+            openQueries[active - 1] = value;
+            return {
+                openQueries: openQueries
+            };
         });
     }
 
@@ -120,7 +158,7 @@ export default class Home extends Component {
 
         let page = (active == 0) ?
             <ConnectionPage connections={this.props.request.connections} onOpenConnection={this.handleOpenQuery} onChange={this.handleChangeConnection}/> :
-            <QueryPage openQuery={openQueries[active - 1]} />;
+            <QueryPage openQuery={openQueries[active - 1]} onChange={this.handleOpenQueryChange}/>;
 
         return (<div className="main theme black">
             <div className="ui top attached tabular menu">

@@ -11,6 +11,10 @@ let context = {
             testConnection: baseUrl + "/connection/testconnection",
             openConnection: baseUrl + "/connection/openconnection",
         },
+        database: {
+            tables: baseUrl + "/database/tables",
+            table: baseUrl + "/database/table"
+        },
         context: {
             get: baseUrl + "/context"
         }

@@ -10,6 +10,22 @@ import ResultPanel from './Query/ResultPanel.js';
 export default class QueryPage extends Component {
     constructor(props) {
         super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event){
+        let {name, value} = event.target;
+        let {onChange} = this.props;
+        
+        onChange({
+            target: {
+                name: this.props.name,
+                value: {
+                    ...this.props.openQuery,
+                    [name] : value
+                }
+            }
+        })
     }
 
     render() {
@@ -18,7 +34,7 @@ export default class QueryPage extends Component {
             <Sidebar />
             <div className="pusher" style={{ marginLeft: "64px", padding: "0" }}>
                 <SplitPane split="vertical" minSize={120} defaultSize={240}>
-                    <DatabaseItems databases={openQuery.databases} />
+                    <DatabaseItems databases={openQuery.databases} onChange={this.handleChange} name="databases"/>
                     <SplitPane split="horizontal" minSize={150} defaultSize={400}>
                         <Editor />
                         <ResultPanel />

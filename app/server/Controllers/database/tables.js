@@ -44,4 +44,4 @@ let Tables = (config, log) => {
         }
     }
 };
-module.exports = Service;
+module.exports = Tables;

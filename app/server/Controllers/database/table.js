@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import mysql from 'mysql';
 
-let Tables = (config, log) => {
+let Table = (config, log) => {
     let getColumns = (db, dbname, tablename) => {
         return new Promise((resolve, reject) => {
             db.query(
@@ -87,4 +87,4 @@ let Tables = (config, log) => {
         }
     }
 };
-module.exports = Service;
+module.exports = Table;
