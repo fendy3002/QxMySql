@@ -20,7 +20,6 @@ class Tables extends Component {
                 tables.fetched = true;
                 if(!err){
                     tables.data = result.data.tables;
-                    console.log(result.data);
                 }
                 else{
                     console.log(err)
