@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { remote } from 'electron';
+let {Menu, MenuItem} = remote;
+import copy from 'copy-to-clipboard';
+
 let expandIcon = (expanded) => {
     return expanded ? "minus" : "plus";
 }
@@ -9,6 +13,7 @@ class Tables extends Component {
     constructor(props) {
         super(props);
         this.handleExpand = this.handleExpand.bind(this);
+        this.handleContextMenu = this.handleContextMenu.bind(this);
     }
     handleExpand(event){
         let {connection, database, onChange, onGetTables} = this.props;
@@ -19,10 +24,16 @@ class Tables extends Component {
             onGetTables(connection, database.name, (err, result) => {
                 tables.fetched = true;
                 if(!err){
-                    tables.data = result.data.tables;
+                    tables.data = result.data.tables.map((table, index) => {
+                        return {
+                            name: table,
+                            fetched: false,
+                            expanded: false
+                        };
+                    });
                 }
                 else{
-                    console.log(err)
+                    console.log(err);
                 }
                 onChange({
                     target:{
@@ -41,16 +52,71 @@ class Tables extends Component {
             });
         }
     }
+
+    handleContextMenu(table, index){
+        return (event) => {
+            if(!table.fetched){
+                let location = {
+                    x: event.clientX, 
+                    y: event.clientY
+                };
+
+                let {connection, database, onChange, onGetTable} = this.props;
+                onGetTable(connection, database.name, table.name, (err, result) => {
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        let tables = database.tables;
+                        tables.data[index] = {
+                            ...table,
+                            ...result.data.table,
+                            fetched: true
+                        };
+
+                        onChange({
+                            target:{
+                                name: this.props.name,
+                                value: tables
+                            }
+                        });
+
+                        let contextMenu = new Menu();
+                        contextMenu.append(new MenuItem({
+                            label: 'Copy select statement',
+                            click: (event) => {
+                                copy(result.data.table.selectStatement)
+                            }
+                        }));
+                        contextMenu.popup(location.x, location.y);
+                    }
+                })
+            }
+            else{
+                let contextMenu = new Menu();
+                contextMenu.append(new MenuItem({
+                    label: 'Copy select statement',
+                    click: (event) => {
+                        copy(table.selectStatement)
+                    }
+                }));
+                contextMenu.popup(location.x, location.y);
+            }
+
+            event.preventDefault();
+        };
+    }
+
     render() {
         let {database} = this.props;
         let {tables} = database;
 
-        let getTableRow = (table) => {
-            return <div className={"item"} key={database.name + "_table" + "_" + table}>
-                <div className="content">
+        let getTableRow = (table, index) => {
+            return <div className={"item"} key={database.name + "_table" + "_" + table.name}>
+                <div className="content" onContextMenu={this.handleContextMenu(table, index)}>
                     <div className="header">
                         <i className={"table icon"}></i>
-                        {table}
+                        {table.name}
                     </div>
                 </div>
             </div>
@@ -58,7 +124,7 @@ class Tables extends Component {
 
         let tableItems = (tables.expanded && tables.data.length > 0) ?
             <div className="list">
-                {tables.data.map((table, index) => getTableRow(table))}
+                {tables.data.map((table, index) => getTableRow(table, index))}
             </div> :
             null;
             
@@ -120,7 +186,7 @@ export default class DatabaseItems extends Component {
     }
 
     render() {
-        let {databases, getTables, openQuery} = this.props;
+        let {databases, getTable, getTables, openQuery} = this.props;
         let databaseDoms = databases.map((database, index) => {
             return <div className={"item " + ((index == 0) ? "active" : "")} key={database.name}>
                 <i className={expandIcon(database.expanded) + " square outline icon"} onClick={this.handleExpand(index)}></i>
@@ -132,6 +198,7 @@ export default class DatabaseItems extends Component {
                     {database.expanded && <div className="list">
                         <Tables database={database} connection={openQuery.connection} name="tables" 
                             onChange={this.handleChange(index)}
+                            onGetTable={getTable}
                             onGetTables={getTables}/>
                         <div className={"item"} key={database.name + "_view"}>
                             <i className={"folder icon"}></i>

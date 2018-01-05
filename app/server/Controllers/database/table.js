@@ -59,8 +59,9 @@ let Table = (config, log) => {
                         });
                         let selectStatement = `select ` + 
                             columns.map((col, index) => {
-                                return 'a1.`' + col + '`'
-                            }).join(",\n") +
+                                let tab = index == 0 ? "" : "    ";
+                                return tab + 'a1.`' + col + '`'
+                            }).join(",\n") + "\n" +
                             "from `" + dbname + "`.`" + tablename + "` a1 \n" +
                             "limit 1000;";
 
@@ -76,9 +77,9 @@ let Table = (config, log) => {
                         });
                         db.end();
                     }).catch((reason) => {
-                        console.log(err);
+                        console.log(reason);
                         res.status(500).json({
-                            message: err.sqlMessage || err.toString()
+                            message: reason.sqlMessage || reason.toString()
                         });
                         db.end();
                     });

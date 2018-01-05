@@ -156,8 +156,9 @@ body {
 }
 .main.theme.black .ui.list .item > .icon, 
 .main.theme.black .ui.list .item > .content,
-.main.theme.black .ui.list .item > .content > .header {
-    color: #AAAAAA;
+.main.theme.black .ui.list .item > .content > .header,
+.main.theme.black .ui.list .item > .content > a.header {
+    color: #AAAAAA !important;
 }
 
 .main.theme.black .ui.list .item.active > .icon, 

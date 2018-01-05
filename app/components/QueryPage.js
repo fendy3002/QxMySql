@@ -106,13 +106,13 @@ export default class QueryPage extends Component {
     }
 
     render() {
-        let {connection, openQuery, getTables} = this.props;
+        let {connection, openQuery, getTable, getTables} = this.props;
         let {activeSidebar, activeDatabase, activeQuery, variables} = this.state;
 
         let sidebarPanel = null;
         if(activeSidebar == "db"){
             sidebarPanel = <DatabaseItems openQuery={openQuery} databases={openQuery.databases} onChange={this.handleChange} name="databases" 
-                getTables={getTables}/>;
+                getTable={getTable} getTables={getTables}/>;
         }
         else if(activeSidebar == "history"){
             sidebarPanel = <div></div>;
