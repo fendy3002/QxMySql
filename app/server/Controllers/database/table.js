@@ -71,7 +71,7 @@ let Table = (config, log) => {
                                     name: tablename,
                                     columns: columns,
                                     selectStatement: selectStatement,
-                                    createStatement: results[1]
+                                    createStatement: results[1][0]["Create Table"]
                                 }
                             }
                         });

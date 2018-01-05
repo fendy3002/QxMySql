@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import TableRow from './TableRow.js';
 
 import { remote } from 'electron';
 let {Menu, MenuItem} = remote;
@@ -53,78 +54,23 @@ class Tables extends Component {
         }
     }
 
-    handleContextMenu(table, index){
+    handleContextMenu(){
         return (event) => {
-            if(!table.fetched){
-                let location = {
-                    x: event.clientX, 
-                    y: event.clientY
-                };
-
-                let {connection, database, onChange, onGetTable} = this.props;
-                onGetTable(connection, database.name, table.name, (err, result) => {
-                    if(err){
-                        console.log(err);
-                    }
-                    else{
-                        let tables = database.tables;
-                        tables.data[index] = {
-                            ...table,
-                            ...result.data.table,
-                            fetched: true
-                        };
-
-                        onChange({
-                            target:{
-                                name: this.props.name,
-                                value: tables
-                            }
-                        });
-
-                        let contextMenu = new Menu();
-                        contextMenu.append(new MenuItem({
-                            label: 'Copy select statement',
-                            click: (event) => {
-                                copy(result.data.table.selectStatement)
-                            }
-                        }));
-                        contextMenu.popup(location.x, location.y);
-                    }
-                })
-            }
-            else{
-                let contextMenu = new Menu();
-                contextMenu.append(new MenuItem({
-                    label: 'Copy select statement',
-                    click: (event) => {
-                        copy(table.selectStatement)
-                    }
-                }));
-                contextMenu.popup(location.x, location.y);
-            }
-
             event.preventDefault();
         };
     }
 
     render() {
-        let {database} = this.props;
+        let {database, connection, onChange, onGetTable} = this.props;
         let {tables} = database;
-
-        let getTableRow = (table, index) => {
-            return <div className={"item"} key={database.name + "_table" + "_" + table.name}>
-                <div className="content" onContextMenu={this.handleContextMenu(table, index)}>
-                    <div className="header">
-                        <i className={"table icon"}></i>
-                        {table.name}
-                    </div>
-                </div>
-            </div>
-        };
 
         let tableItems = (tables.expanded && tables.data.length > 0) ?
             <div className="list">
-                {tables.data.map((table, index) => getTableRow(table, index))}
+                {tables.data.map((table, index) => 
+                    <TableRow database={database} connection={connection} 
+                        table={table} onGetTable={onGetTable} index={index} key={index} 
+                        onChange={onChange}/>
+                )}
             </div> :
             null;
             
