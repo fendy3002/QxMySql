@@ -8,6 +8,8 @@ import ConnectionPage from './ConnectionPage.js';
 import StateQueryPage from '../containers/StateQueryPage.js';
 import {saveConnections} from '../actions/connection.js';
 
+import model from '../helpers/model.js';
+
 import { remote } from 'electron';
 let {Menu, MenuItem} = remote;
 
@@ -81,44 +83,13 @@ export default class Home extends Component {
         openConnection(connection, (err, response) => {
             if(!err){
                 let databases = response.data.databases.map((database, index) => {
-                    return {
-                        name: database,
-                        expanded: false,
-                        tables: {
-                            fetched: false,
-                            expanded: false,
-                            data: []
-                        },
-                        views: {
-                            fetched: false,
-                            expanded: false,
-                            data: []
-                        },
-                        procedures: {
-                            fetched: false,
-                            expanded: false,
-                            data: []
-                        },
-                        functions: {
-                            fetched: false,
-                            expanded: false,
-                            data: []
-                        }
-                    }
+                    return model.database(database);
                 });
                 this.setState((prevState, props) => {
                     return {
-                        openQueries: prevState.openQueries.concat({
-                            connection: connection,
-                            databases: databases,
-                            queries: [{
-                                sending: false,
-                                title: "Query 1",
-                                query: "",
-                                results: []
-                            }],
-                            activeQuery: 0
-                        }),
+                        openQueries: prevState.openQueries.concat(
+                            model.openQuery(connection, databases)
+                        ),
                         active: prevState.openQueries.length + 1
                     };
                 });

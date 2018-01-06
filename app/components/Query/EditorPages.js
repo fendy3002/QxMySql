@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Editor from './Editor.js';
 import { relative } from 'path';
+import model from '../../helpers/model.js';
 
 export default class EditorPages extends Component {
     constructor(props) {
         super(props);
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleTabChange = this.handleTabChange.bind(this);
+        this.handleTabAdd = this.handleTabAdd.bind(this);
+        this.handleTabRemove = this.handleTabRemove.bind(this);
     }
 
     handleChange(event){
@@ -16,6 +20,50 @@ export default class EditorPages extends Component {
         
         let queries = openQuery.queries;
         queries[openQuery.activeQuery] = value;
+        onChange({
+            target:{
+                name: this.props.name,
+                value: queries
+            }
+        });
+    }
+
+    handleTabAdd(){
+        let {openQuery, onChange} = this.props;
+        let queries = openQuery.queries.concat(
+            model.queryPage("Query " + (openQuery.queries.length + 1))
+        );
+        
+        onChange({
+            target:{
+                name: this.props.name,
+                value: queries
+            }
+        });
+    }
+
+    handleTabChange(index){
+        let {onChange} = this.props;
+        
+        onChange({
+            target:{
+                name: "activeQuery",
+                value: index
+            }
+        });
+    }
+
+    handleTabRemove(index){
+        let {openQuery, onChange} = this.props;
+        let queries = openQuery.queries;
+        queries.splice(index, 1);
+
+        onChange({
+            target:{
+                name: "activeQuery",
+                value: index - 1
+            }
+        });
         onChange({
             target:{
                 name: this.props.name,
@@ -35,12 +83,17 @@ export default class EditorPages extends Component {
                     onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        this.handleTabClose(index);
+                        this.handleTabRemove(index);
                         return false;
                     }}>
                 </i>
             </a>
-        });
+        }).concat(
+            <a className={"item"} key={openQuery.queries.length}
+                onClick={this.handleTabAdd}>
+                <i className="add icon"></i>
+            </a>
+        );
 
         let activeQuery = openQuery.queries[openQuery.activeQuery];
         return <div className="" style={{ width: "100%", height:"100%", position:"absolute" }}>

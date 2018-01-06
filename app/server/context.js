@@ -16,6 +16,9 @@ let context = {
             table: baseUrl + "/database/table",
             tables: baseUrl + "/database/tables",
         },
+        query: {
+            execute: baseUrl + "/query/execute",
+        },
         context: {
             get: baseUrl + "/context"
         }

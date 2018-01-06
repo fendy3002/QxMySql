@@ -13,6 +13,7 @@ let App = (appConf, log) => {
     app.get('/', (req, res) => res.send('Hello World!'))
     app.use('/connection', require('./Routes/connection')(appConf, log));
     app.use('/database', require('./Routes/database')(appConf, log));
+    app.use('/query', require('./Routes/query')(appConf, log));
     
     app.listen(appConf.app.serverPort, () => 
         console.log('Example app listening on port ' + appConf.app.serverPort + '!')
