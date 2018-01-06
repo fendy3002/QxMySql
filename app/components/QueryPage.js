@@ -127,7 +127,7 @@ export default class QueryPage extends Component {
                 <SplitPane split="vertical" minSize={120} defaultSize={240}>
                     {sidebarPanel}
                     <SplitPane split="horizontal" minSize={150} defaultSize={400}>
-                        <EditorPages openQuery={openQuery} />
+                        <EditorPages openQuery={openQuery} onChange={this.handleChange} name="queries" />
                         <ResultPanel />
                     </SplitPane>
                 </SplitPane>

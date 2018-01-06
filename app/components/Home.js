@@ -116,7 +116,8 @@ export default class Home extends Component {
                                 title: "Query 1",
                                 query: "",
                                 results: []
-                            }]
+                            }],
+                            activeQuery: 0
                         }),
                         active: prevState.openQueries.length + 1
                     };
