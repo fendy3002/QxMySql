@@ -34,7 +34,6 @@ let QExecute = (config, log) => {
     
     let parseResult = (result) => {
         let results = [];
-        console.log("result", result);
         if(!result || result.length == 0){
             return [{
                 data: [],

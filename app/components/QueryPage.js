@@ -126,10 +126,7 @@ export default class QueryPage extends Component {
             <div className="pusher" style={{ marginLeft: "64px", padding: "0" }}>
                 <SplitPane split="vertical" minSize={120} defaultSize={240}>
                     {sidebarPanel}
-                    <SplitPane split="horizontal" minSize={150} defaultSize={400}>
-                        <EditorPages openQuery={openQuery} onExecute={getExecute} onChange={this.handleChange} />
-                        <ResultPanel />
-                    </SplitPane>
+                    <EditorPages openQuery={openQuery} onExecute={getExecute} onChange={this.handleChange} />
                 </SplitPane>
             </div>
         </div>;

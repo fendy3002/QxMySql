@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import SplitPane from 'react-split-pane';
+
 import Editor from './Editor.js';
 import { relative } from 'path';
+import ResultPanel from './ResultPanel.js';
 import model from '../../helpers/model.js';
 
 export default class EditorPages extends Component {
@@ -100,9 +103,10 @@ export default class EditorPages extends Component {
                 let queries = openQuery.queries;
                 queries[openQuery.activeQuery] = {
                     ...queryPage,
-                    results: results.data.results
+                    results: results.data.results,
+                    activeResult: 0
                 };
-                console.log(results.data.results);
+                console.log("results.data.results", results.data.results);
                 onChange({
                     target:{
                         name: this.props.name,
@@ -140,17 +144,20 @@ export default class EditorPages extends Component {
         );
 
         let activeQuery = openQuery.queries[openQuery.activeQuery];
-        return <div className="" style={{ width: "100%", height:"100%", position:"absolute" }}>
-            <div style={{position:"relative", height:"100%", display: "flex", flexFlow: "column"}}>
-                <div className="ui top attached tabular menu" style={{ flex: "0 1 auto" }}>
-                    {tabHeaders}
-                </div>
-                <div className="ui bottom attached active tab segment" style={{padding: 0, flex:"1 1 auto"}}>
-                    {activeQuery && 
-                        <Editor query={activeQuery} onExecute={this.handleExecute} onChange={this.handleChange} />
-                    }
+        return <SplitPane split="horizontal" minSize={150} defaultSize={400}>
+            <div className="" style={{ width: "100%", height:"100%", position:"absolute" }}>
+                <div style={{position:"relative", height:"100%", display: "flex", flexFlow: "column"}}>
+                    <div className="ui top attached tabular menu" style={{ flex: "0 1 auto" }}>
+                        {tabHeaders}
+                    </div>
+                    <div className="ui bottom attached active tab segment" style={{padding: 0, flex:"1 1 auto"}}>
+                        {activeQuery && 
+                            <Editor query={activeQuery} onExecute={this.handleExecute} onChange={this.handleChange} />
+                        }
+                    </div>
                 </div>
             </div>
-        </div>;
+            <ResultPanel query={activeQuery} onChange={this.handleChange} />
+        </SplitPane>;
     }
 }
