@@ -12,6 +12,7 @@ export default class EditorPages extends Component {
         this.handleTabChange = this.handleTabChange.bind(this);
         this.handleTabAdd = this.handleTabAdd.bind(this);
         this.handleTabRemove = this.handleTabRemove.bind(this);
+        this.handleExecute = this.handleExecute.bind(this);
     }
 
     handleChange(event){
@@ -78,12 +79,39 @@ export default class EditorPages extends Component {
 
         onChange({
             target:{
-                name: "activeQuery",
+                name: this.props.name,
                 value: {
                     ...openQuery,
                     activeQuery: newActiveQuery,
                     queries: queries
                 }
+            }
+        });
+    }
+
+    handleExecute(queryPage){
+        let {openQuery, onExecute, onChange} = this.props;
+
+        let {connection, activeDatabase} = openQuery;
+        let queryText = queryPage.query;
+
+        onExecute(connection, activeDatabase, queryText, (err, results) => {
+            if(!err){
+                let queries = openQuery.queries;
+                queries[openQuery.activeQuery] = {
+                    ...queryPage,
+                    results: results.data.results
+                };
+                console.log(results.data.results);
+                onChange({
+                    target:{
+                        name: this.props.name,
+                        value: {
+                            ...openQuery,
+                            queries: queries
+                        }
+                    }}
+                );
             }
         });
     }
@@ -119,7 +147,7 @@ export default class EditorPages extends Component {
                 </div>
                 <div className="ui bottom attached active tab segment" style={{padding: 0, flex:"1 1 auto"}}>
                     {activeQuery && 
-                        <Editor query={activeQuery} onChange={this.handleChange} />
+                        <Editor query={activeQuery} onExecute={this.handleExecute} onChange={this.handleChange} />
                     }
                 </div>
             </div>

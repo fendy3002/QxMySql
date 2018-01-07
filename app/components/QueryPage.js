@@ -106,7 +106,7 @@ export default class QueryPage extends Component {
     }
 
     render() {
-        let {connection, openQuery, getTable, getTables} = this.props;
+        let {connection, openQuery, getTable, getTables, getExecute} = this.props;
         let {activeSidebar, activeDatabase, activeQuery, variables} = this.state;
 
         let sidebarPanel = null;
@@ -127,7 +127,7 @@ export default class QueryPage extends Component {
                 <SplitPane split="vertical" minSize={120} defaultSize={240}>
                     {sidebarPanel}
                     <SplitPane split="horizontal" minSize={150} defaultSize={400}>
-                        <EditorPages openQuery={openQuery} onChange={this.handleChange} />
+                        <EditorPages openQuery={openQuery} onExecute={getExecute} onChange={this.handleChange} />
                         <ResultPanel />
                     </SplitPane>
                 </SplitPane>

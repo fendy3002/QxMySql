@@ -2,12 +2,14 @@ let queryPage = (title = "Query 1") => ({
     sending: false,
     title: title,
     query: "",
+    activeResult: 0,
     results: []
 });
 
 let openQuery = (connection, databases) => ({
     connection: connection,
     databases: databases,
+    activeDatabase: "",
     queries: [queryPage()],
     activeQuery: 0
 });

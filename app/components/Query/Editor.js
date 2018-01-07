@@ -29,13 +29,14 @@ export default class Editor extends Component {
     }
 
     handleContextMenu() {
+        let {query: queryPage, onExecute} = this.props;
         let inputMenu = new Menu();
         let contextMenu = new Menu();
 
         let executeMenu = {
             label: 'Execute',
             click: () => {
-                console.log("Executed")
+                onExecute(queryPage);
             }
         };
 
