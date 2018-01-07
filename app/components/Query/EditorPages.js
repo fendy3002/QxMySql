@@ -106,7 +106,6 @@ export default class EditorPages extends Component {
                     results: results.data.results,
                     activeResult: 0
                 };
-                console.log("results.data.results", results.data.results);
                 onChange({
                     target:{
                         name: this.props.name,

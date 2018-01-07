@@ -92,10 +92,11 @@ export default class DatabaseItems extends Component {
         super(props);
         this.handleExpand = this.handleExpand.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSetActive = this.handleSetActive.bind(this);
     }
 
     handleExpand(index){
-        let {onChange} = this.props;
+        let {openQuery, onChange} = this.props;
         return (event) => {
             let {databases} = this.props;
             let database = { ...databases[index] };
@@ -106,14 +107,17 @@ export default class DatabaseItems extends Component {
             onChange({
                 target:{
                     name: this.props.name,
-                    value: databases
+                    value: {
+                        ...openQuery,
+                        databases: databases
+                    }
                 }
             });
         };
     }
 
     handleChange(index){
-        let {databases, name: propsName, onChange} = this.props;
+        let {openQuery, databases, name: propsName, onChange} = this.props;
 
         return (event) => {
             let {name, value} = event.target;
@@ -125,19 +129,37 @@ export default class DatabaseItems extends Component {
             onChange({
                 target:{
                     name: propsName,
-                    value: databases
+                    value: {
+                        ...openQuery,
+                        databases: databases
+                    }
                 }
             });
         };
     }
 
+    handleSetActive(database){
+        let {openQuery, onChange} = this.props;
+
+        onChange({
+            target:{
+                name: this.props.name,
+                value: {
+                    ...openQuery,
+                    activeDatabase: database
+                }
+            }
+        });
+    }
+
     render() {
         let {databases, getTable, getTables, openQuery} = this.props;
         let databaseDoms = databases.map((database, index) => {
-            return <div className={"item " + ((index == 0) ? "active" : "")} key={database.name}>
+            return <div className={"item " + (database.name == openQuery.activeDatabase ? "active" : "")} 
+                key={database.name}>
                 <i className={expandIcon(database.expanded) + " square outline icon"} onClick={this.handleExpand(index)}></i>
                 <div className="content">
-                    <a className="header">
+                    <a className="header" onDoubleClick={() => this.handleSetActive(database.name)}>
                         <i className="database icon"></i>
                         {database.name}
                     </a>

@@ -14,7 +14,7 @@ export default class ResultTable extends Component {
 
         let body = result.data.map((each, index) => {
             let fieldDoms = result.fields.map((field, index) => {
-                return <td>{each[field]}</td>;
+                return <td key={index}>{each[field]}</td>;
             });
             return <tr>
                 {fieldDoms}

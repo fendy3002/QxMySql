@@ -164,7 +164,7 @@ body {
 .main.theme.black .ui.list .item.active > .icon, 
 .main.theme.black .ui.list .item.active > .content,
 .main.theme.black .ui.list .item.active > .content > .header {
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
 
 .main.theme.black .ui.list .item:hover > .icon,
