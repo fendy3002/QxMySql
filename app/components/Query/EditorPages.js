@@ -33,41 +33,57 @@ export default class EditorPages extends Component {
         let queries = openQuery.queries.concat(
             model.queryPage("Query " + (openQuery.queries.length + 1))
         );
-        
+        let newActiveQuery = openQuery.queries.length;
         onChange({
             target:{
                 name: this.props.name,
-                value: queries
+                value: {
+                    ...openQuery,
+                    queries: queries,
+                    activeQuery: newActiveQuery
+                }
             }
         });
     }
 
     handleTabChange(index){
-        let {onChange} = this.props;
+        let {openQuery, onChange} = this.props;
         
         onChange({
             target:{
-                name: "activeQuery",
-                value: index
+                name: this.props.name,
+                value: {
+                    ...openQuery,
+                    activeQuery: index
+                }
             }
         });
     }
 
     handleTabRemove(index){
         let {openQuery, onChange} = this.props;
+
         let queries = openQuery.queries;
+
+        let newActiveQuery = openQuery.activeQuery;
+        if(index == openQuery.activeQuery &&
+            index == (openQuery.queries.length - 1)){
+            newActiveQuery -= 1;
+        }
+        else if(index < openQuery.activeQuery){
+            newActiveQuery -= 1;
+        }
+        
         queries.splice(index, 1);
 
         onChange({
             target:{
                 name: "activeQuery",
-                value: index - 1
-            }
-        });
-        onChange({
-            target:{
-                name: this.props.name,
-                value: queries
+                value: {
+                    ...openQuery,
+                    activeQuery: newActiveQuery,
+                    queries: queries
+                }
             }
         });
     }
@@ -102,9 +118,11 @@ export default class EditorPages extends Component {
                     {tabHeaders}
                 </div>
                 <div className="ui bottom attached active tab segment" style={{padding: 0, flex:"1 1 auto"}}>
-                    <Editor query={activeQuery} onChange={this.handleChange} />
+                    {activeQuery && 
+                        <Editor query={activeQuery} onChange={this.handleChange} />
+                    }
                 </div>
             </div>
-        </div>
+        </div>;
     }
 }

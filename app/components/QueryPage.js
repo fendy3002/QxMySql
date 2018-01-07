@@ -35,7 +35,7 @@ export default class QueryPage extends Component {
                 name: this.props.name,
                 value: {
                     ...this.props.openQuery,
-                    [name] : value
+                    ...value
                 }
             }
         })
@@ -127,7 +127,7 @@ export default class QueryPage extends Component {
                 <SplitPane split="vertical" minSize={120} defaultSize={240}>
                     {sidebarPanel}
                     <SplitPane split="horizontal" minSize={150} defaultSize={400}>
-                        <EditorPages openQuery={openQuery} onChange={this.handleChange} name="queries" />
+                        <EditorPages openQuery={openQuery} onChange={this.handleChange} />
                         <ResultPanel />
                     </SplitPane>
                 </SplitPane>
