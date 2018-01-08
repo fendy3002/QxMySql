@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import brace from 'brace';
 import AceEditor from 'react-ace';
 import { remote } from 'electron';
+import lo from 'lodash';
+import Mousetrap from 'mousetrap';
+
 let {Menu, MenuItem} = remote;
 
 import 'brace/mode/mysql';
@@ -11,6 +14,10 @@ import 'brace/theme/twilight';
 export default class Editor extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            div: null
+        };
 
         this.handleQueryChange = this.handleQueryChange.bind(this);
         this.handleContextMenu = this.handleContextMenu.bind(this);
@@ -80,10 +87,24 @@ export default class Editor extends Component {
         };
     }
 
-    render() {
-        let {query} = this.props;
+    componentDidMount(){
+        let {query, server, onExecute} = this.props;
+        console.log(this.div);
+        let keyConfigs = server.keyboard
+            .filter((key) => key.when({ inQueryEditor: true }) && key.command == "execute");
+        console.log(keyConfigs);
+        keyConfigs.forEach((key, index) => {
+            console.log("key", key);
+            Mousetrap(this.div).bind(key.key, () => {
+                console.log("A"); onExecute(query)
+            });
+        });
+    }
 
-        return <div onContextMenu={this.handleContextMenu()}>
+    render() {
+        let {query, server, onExecute} = this.props;
+
+        return <div onContextMenu={this.handleContextMenu()} ref={(n) => this.div = n }>
             <AceEditor
                 mode="mysql"
                 theme="twilight"

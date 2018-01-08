@@ -9,8 +9,27 @@ import './app.global.css';
 
 import {getConnections} from './actions/connection.js';
 
+let createFunction = (when) => {
+  let defaultAssert = {
+      inConnectionPage: false,
+      inQueryEditor: false,
+      inDatabaseItem: false
+  };
+  let body = 'let {' + Object.keys(defaultAssert).join(", ") + '} = Object.assign({}, this, obj); return ' + when;
+  return new Function('obj', body).bind(defaultAssert);
+};
+
 const store = configureStore({
-  server: context,
+  server: {
+    ...context,
+    keyboard: context.keyboard.map((config, index) => {
+      return {
+          "key": config.key,
+          "command": config.command,
+          "when": createFunction(config.when)
+      }
+    })
+  },
   request: {
     connections: []
   }

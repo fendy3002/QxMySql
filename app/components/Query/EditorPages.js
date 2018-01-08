@@ -120,7 +120,7 @@ export default class EditorPages extends Component {
     }
 
     render() {
-        let {openQuery} = this.props;
+        let {openQuery, server} = this.props;
         let tabHeaders = openQuery.queries.map((query, index) => {
             return <a className={"item " + (openQuery.activeQuery == index ? "active" : "") } key={index}
                 onClick={() => {this.handleTabChange(index)}}>
@@ -151,7 +151,7 @@ export default class EditorPages extends Component {
                     </div>
                     <div className="ui bottom attached active tab segment" style={{padding: 0, flex:"1 1 auto"}}>
                         {activeQuery && 
-                            <Editor query={activeQuery} onExecute={this.handleExecute} onChange={this.handleChange} />
+                            <Editor server={server} query={activeQuery} onExecute={this.handleExecute} onChange={this.handleChange} />
                         }
                     </div>
                 </div>

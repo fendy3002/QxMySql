@@ -25,20 +25,4 @@ try{
 }catch(ex){
 }
 
-let createFunction = (when) => {
-    let defaultAssert = {
-        inConnectionPage: false,
-        inQueryEditor: false,
-        inDatabaseItem: false
-    };
-    let body = 'let {' + Object.keys(defaultAssert).join(", ") + '} = {...this, ...obj}; return ' + when;
-    return new Function('obj', body).bind(defaultAssert);
-};
-
-module.exports = configurations.map((config, index) => {
-    return {
-        "key": config.key,
-        "command": config.command,
-        "when": createFunction(config.when)
-    };
-});
+module.exports = configurations;

@@ -10,6 +10,7 @@ import {getExecute} from '../actions/query.js';
 
 var mapStateToProps = function(state){
   return {
+    server: state.server
   };
 };
 
