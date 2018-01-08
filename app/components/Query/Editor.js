@@ -21,6 +21,7 @@ export default class Editor extends Component {
 
         this.handleQueryChange = this.handleQueryChange.bind(this);
         this.handleContextMenu = this.handleContextMenu.bind(this);
+        this.handleExecute = this.handleExecute.bind(this);
     }
     handleQueryChange(newValue){
         let {query, onChange} = this.props;
@@ -34,6 +35,10 @@ export default class Editor extends Component {
             }
         });
     }
+    handleExecute(){
+        let {query: queryPage, server, onExecute} = this.props;
+        onExecute(queryPage);
+    }
 
     handleContextMenu() {
         let {query: queryPage, onExecute} = this.props;
@@ -43,7 +48,7 @@ export default class Editor extends Component {
         let executeMenu = {
             label: 'Execute',
             click: () => {
-                onExecute(queryPage);
+                this.handleExecute();
             }
         };
 
@@ -88,15 +93,12 @@ export default class Editor extends Component {
     }
 
     componentDidMount(){
-        let {query, server, onExecute} = this.props;
-        console.log(this.div);
+        let {server} = this.props;
         let keyConfigs = server.keyboard
-            .filter((key) => key.when({ inQueryEditor: true }) && key.command == "execute");
-        console.log(keyConfigs);
+            .filter((key) => key.when({ inQueryEditor: true }) && key.command == "editor.execute");
         keyConfigs.forEach((key, index) => {
-            console.log("key", key);
             Mousetrap(this.div).bind(key.key, () => {
-                console.log("A"); onExecute(query)
+                this.handleExecute();
             });
         });
     }

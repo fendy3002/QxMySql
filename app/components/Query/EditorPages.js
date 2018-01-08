@@ -97,6 +97,7 @@ export default class EditorPages extends Component {
 
         let {connection, activeDatabase} = openQuery;
         let queryText = queryPage.query;
+        console.log(queryText);
 
         onExecute(connection, activeDatabase, queryText, (err, results) => {
             if(!err){
@@ -106,6 +107,7 @@ export default class EditorPages extends Component {
                     results: results.data.results,
                     activeResult: 0
                 };
+                console.log(queries[openQuery.activeQuery]);
                 onChange({
                     target:{
                         name: this.props.name,

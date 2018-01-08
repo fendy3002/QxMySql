@@ -15,7 +15,12 @@ let createFunction = (when) => {
       inQueryEditor: false,
       inDatabaseItem: false
   };
-  let body = 'let {' + Object.keys(defaultAssert).join(", ") + '} = Object.assign({}, this, obj); return ' + when;
+
+  let assignment = Object.keys(defaultAssert).map((assert) => {
+    return "let " + assert + " = assert." + assert + ";";
+  }).join("");
+
+  let body = 'let assert = Object.assign({}, this, obj); '+ assignment +' return ' + when;
   return new Function('obj', body).bind(defaultAssert);
 };
 
