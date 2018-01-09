@@ -96,6 +96,7 @@ export default class Editor extends Component {
         let {server} = this.props;
         let keyConfigs = server.keyboard
             .filter((key) => key.when({ inQueryEditor: true }) && key.command == "editor.execute");
+        
         keyConfigs.forEach((key, index) => {
             Mousetrap(this.div).bind(key.key, () => {
                 this.handleExecute();

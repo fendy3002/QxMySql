@@ -12,6 +12,7 @@ import {getConnections} from './actions/connection.js';
 let createFunction = (when) => {
   let defaultAssert = {
       inConnectionPage: false,
+      inQueriesPage: false,
       inQueryEditor: false,
       inDatabaseItem: false
   };
