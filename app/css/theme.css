@@ -50,29 +50,14 @@ body {
     ======= */
 
 .theme.black .Resizer {
-    background: #ABACAD;
-    opacity: 1;
-}
-
-.theme.black .Resizer.vertical{
-    width: 11px;
-
-    border-left: 5px solid #1B1C1D;
-    border-right: 5px solid #1B1C1D;
+    background-color: #ABACAD;
 }
 .theme.black .Resizer.vertical:hover{
-    background: #FFFFFF;
+    background-color: #FFFFFF;
     z-index: 2;
 }
-
-.theme.black .Resizer.horizontal{
-    height: 11px;
-
-    border-top: 5px solid #1B1C1D;
-    border-bottom: 5px solid #1B1C1D;
-}
 .theme.black .Resizer.horizontal:hover{
-    background: #FFFFFF;
+    background-color: #FFFFFF;
     z-index: 2;
 }
 

@@ -191,6 +191,7 @@
     "devtron": "^1.4.0",
     "dotenv": "^4.0.0",
     "electron-debug": "^1.2.0",
+    "fixed-data-table-2": "^0.8.9",
     "font-awesome": "^4.7.0",
     "history": "^4.6.3",
     "lodash": "^4.17.4",

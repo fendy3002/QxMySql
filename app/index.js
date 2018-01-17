@@ -6,6 +6,9 @@ import { configureStore, history } from './store/configureStore';
 
 import context from './server/context.js';
 import './app.global.css';
+import './css/fixed-data-table-base.min.global.css';
+import './css/fixed-data-table.min.global.css';
+import './css/fixed-data-table-style.min.global.css';
 
 import {getConnections} from './actions/connection.js';
 
