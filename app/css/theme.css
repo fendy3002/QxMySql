@@ -4,7 +4,7 @@
 
 body {
     color: #DFDFDF;
-    background-color: #1B1C1D;
+    background-color: #1E1E1E;
 }
 
 .theme.black h1,
@@ -79,7 +79,7 @@ body {
 }
 
 .main.theme.black .ui.bottom.tab {
-    background: #1B1C1D;
+    background: #1E1E1E;
 }
 
 /*  ======
@@ -89,7 +89,7 @@ body {
 .main.theme.black .ui.cards > .card,
 .main.theme.black .ui.card{
     color: #DFDFDF;
-    background-color: #1B1C1D;
+    background-color: #1E1E1E;
     box-shadow: 0px 1px 3px 0px #AAAAAA, 0px 0px 0px 1px #AAAAAA;
 }
 .main.theme.black .ui.cards > .card > .content,
@@ -114,7 +114,7 @@ body {
 .main.theme.black .ui.sidebar {
     color: #DFDFDF;
     border-color: #DFDFDF;
-    background-color: #1B1C1D;
+    background-color: #363636;
 }
 .main.theme.black .ui.sidebar .item {
     color: #AAAAAA;
@@ -132,18 +132,23 @@ body {
     color: #FFFFFF;
 }
 
+.main.theme.black .sidebar-panel {
+    background-color: #2A292B;
+    color: #8D8D8E;
+}
+
 /*  ======
     LIST
     ======= */
 
 .main.theme.black .ui.list .item{
-    color: #AAAAAA;
+    color: #8D8D8E;
 }
 .main.theme.black .ui.list .item > .icon, 
 .main.theme.black .ui.list .item > .content,
 .main.theme.black .ui.list .item > .content > .header,
 .main.theme.black .ui.list .item > .content > a.header {
-    color: #AAAAAA !important;
+    color: #8D8D8E !important;
 }
 
 .main.theme.black .ui.list .item.active > .icon, 

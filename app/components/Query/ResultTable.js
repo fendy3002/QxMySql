@@ -55,7 +55,7 @@ export default class ResultTable extends Component {
                     columnKey={each}
                     header={<Cell>{each}</Cell>}
                     cell={<TextCell data={result.data} />}
-                    fixed={true}
+                    flexGrow={1}
                     width={50}
                 />
             })}
